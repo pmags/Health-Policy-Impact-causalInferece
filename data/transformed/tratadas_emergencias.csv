@@ -1,0 +1,283 @@
+data,instituicao,urgencias_geral,unidade_saude,year,urgencias_mensais
+2013-01-01,"Hospital Santa Maria Maior, EPE",4484,Barcelos,2013,4484
+2013-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",7724,Vila do Conde,2013,7724
+2013-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",14069,Vila do Conde,2013,6345
+2013-02-01,"Hospital Santa Maria Maior, EPE",8515,Barcelos,2013,4031
+2013-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",20404,Vila do Conde,2013,6335
+2013-03-01,"Hospital Santa Maria Maior, EPE",12731,Barcelos,2013,4216
+2013-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",26415,Vila do Conde,2013,6011
+2013-04-01,"Hospital Santa Maria Maior, EPE",16864,Barcelos,2013,4133
+2013-05-01,"Hospital Santa Maria Maior, EPE",21144,Barcelos,2013,4280
+2013-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",32728,Vila do Conde,2013,6313
+2013-06-01,"Hospital Santa Maria Maior, EPE",25443,Barcelos,2013,4299
+2013-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",38879,Vila do Conde,2013,6151
+2013-07-01,"Hospital Santa Maria Maior, EPE",29986,Barcelos,2013,4543
+2013-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",45825,Vila do Conde,2013,6946
+2013-08-01,"Hospital Santa Maria Maior, EPE",34427,Barcelos,2013,4441
+2013-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",52493,Vila do Conde,2013,6668
+2013-09-01,"Hospital Santa Maria Maior, EPE",38535,Barcelos,2013,4108
+2013-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",58559,Vila do Conde,2013,6066
+2013-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",65229,Vila do Conde,2013,6670
+2013-10-01,"Hospital Santa Maria Maior, EPE",42704,Barcelos,2013,4169
+2013-11-01,"Hospital Santa Maria Maior, EPE",46591,Barcelos,2013,3887
+2013-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",71548,Vila do Conde,2013,6319
+2013-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",78471,Vila do Conde,2013,6923
+2013-12-01,"Hospital Santa Maria Maior, EPE",50996,Barcelos,2013,4405
+2014-01-01,"Hospital Santa Maria Maior, EPE",4466,Barcelos,2014,4466
+2014-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",7265,Vila do Conde,2014,7265
+2014-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",13136,Vila do Conde,2014,5871
+2014-02-01,"Hospital Santa Maria Maior, EPE",8286,Barcelos,2014,3820
+2014-03-01,"Hospital Santa Maria Maior, EPE",12415,Barcelos,2014,4129
+2014-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",19562,Vila do Conde,2014,6426
+2014-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",25673,Vila do Conde,2014,6111
+2014-04-01,"Hospital Santa Maria Maior, EPE",16572,Barcelos,2014,4157
+2014-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",32019,Vila do Conde,2014,6346
+2014-05-01,"Hospital Santa Maria Maior, EPE",20763,Barcelos,2014,4191
+2014-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",38291,Vila do Conde,2014,6272
+2014-06-01,"Hospital Santa Maria Maior, EPE",24721,Barcelos,2014,3958
+2014-07-01,"Hospital Santa Maria Maior, EPE",28853,Barcelos,2014,4132
+2014-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",44522,Vila do Conde,2014,6231
+2014-08-01,"Hospital Santa Maria Maior, EPE",33032,Barcelos,2014,4179
+2014-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",50736,Vila do Conde,2014,6214
+2014-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",56565,Vila do Conde,2014,5829
+2014-09-01,"Hospital Santa Maria Maior, EPE",36964,Barcelos,2014,3932
+2014-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",63029,Vila do Conde,2014,6464
+2014-10-01,"Hospital Santa Maria Maior, EPE",41065,Barcelos,2014,4101
+2014-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",69164,Vila do Conde,2014,6135
+2014-11-01,"Hospital Santa Maria Maior, EPE",44778,Barcelos,2014,3713
+2014-12-01,"Hospital Santa Maria Maior, EPE",48824,Barcelos,2014,4046
+2014-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",75851,Vila do Conde,2014,6687
+2015-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",7333,Vila do Conde,2015,7333
+2015-01-01,"Hospital Santa Maria Maior, EPE",4339,Barcelos,2015,4339
+2015-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",12880,Vila do Conde,2015,5547
+2015-02-01,"Hospital Santa Maria Maior, EPE",8064,Barcelos,2015,3725
+2015-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",19178,Vila do Conde,2015,6298
+2015-03-01,"Hospital Santa Maria Maior, EPE",12148,Barcelos,2015,4084
+2015-04-01,"Hospital Santa Maria Maior, EPE",15953,Barcelos,2015,3805
+2015-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",24942,Vila do Conde,2015,5764
+2015-05-01,"Hospital Santa Maria Maior, EPE",19920,Barcelos,2015,3967
+2015-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",31061,Vila do Conde,2015,6119
+2015-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",37114,Vila do Conde,2015,6053
+2015-06-01,"Hospital Santa Maria Maior, EPE",23929,Barcelos,2015,4009
+2015-07-01,"Hospital Santa Maria Maior, EPE",28094,Barcelos,2015,4165
+2015-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",43163,Vila do Conde,2015,6049
+2015-08-01,"Hospital Santa Maria Maior, EPE",32132,Barcelos,2015,4038
+2015-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",49166,Vila do Conde,2015,6003
+2015-09-01,"Hospital Santa Maria Maior, EPE",35976,Barcelos,2015,3844
+2015-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",54702,Vila do Conde,2015,5536
+2015-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",60827,Vila do Conde,2015,6125
+2015-10-01,"Hospital Santa Maria Maior, EPE",40147,Barcelos,2015,4171
+2015-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",66976,Vila do Conde,2015,6149
+2015-11-01,"Hospital Santa Maria Maior, EPE",44189,Barcelos,2015,4042
+2015-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",73551,Vila do Conde,2015,6575
+2015-12-01,"Hospital Santa Maria Maior, EPE",48930,Barcelos,2015,4741
+2016-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6145,Vila do Conde,2016,6145
+2016-01-01,"Hospital Santa Maria Maior, EPE",4278,Barcelos,2016,4278
+2016-02-01,"Hospital Santa Maria Maior, EPE",8304,Barcelos,2016,4026
+2016-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",12015,Vila do Conde,2016,5870
+2016-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",18607,Vila do Conde,2016,6592
+2016-03-01,"Hospital Santa Maria Maior, EPE",12789,Barcelos,2016,4485
+2016-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",25049,Vila do Conde,2016,6442
+2016-04-01,"Hospital Santa Maria Maior, EPE",17123,Barcelos,2016,4334
+2016-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",31624,Vila do Conde,2016,6575
+2016-05-01,"Hospital Santa Maria Maior, EPE",21654,Barcelos,2016,4531
+2016-06-01,"Hospital Santa Maria Maior, EPE",25919,Barcelos,2016,4265
+2016-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",37559,Vila do Conde,2016,5935
+2016-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",43876,Vila do Conde,2016,6317
+2016-07-01,"Hospital Santa Maria Maior, EPE",30729,Barcelos,2016,4810
+2016-08-01,"Hospital Santa Maria Maior, EPE",35368,Barcelos,2016,4639
+2016-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",50227,Vila do Conde,2016,6351
+2016-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",55806,Vila do Conde,2016,5579
+2016-09-01,"Hospital Santa Maria Maior, EPE",39704,Barcelos,2016,4336
+2016-10-01,"Hospital Santa Maria Maior, EPE",44331,Barcelos,2016,4627
+2016-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",61990,Vila do Conde,2016,6184
+2016-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",68040,Vila do Conde,2016,6050
+2016-11-01,"Hospital Santa Maria Maior, EPE",48370,Barcelos,2016,4039
+2016-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",74777,Vila do Conde,2016,6737
+2016-12-01,"Hospital Santa Maria Maior, EPE",52674,Barcelos,2016,4304
+2017-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6362,Vila do Conde,2017,6362
+2017-01-01,"Hospital Santa Maria Maior, EPE",4188,Barcelos,2017,4188
+2017-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",11839,Vila do Conde,2017,5477
+2017-02-01,"Hospital Santa Maria Maior, EPE",7882,Barcelos,2017,3694
+2017-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",18151,Vila do Conde,2017,6312
+2017-03-01,"Hospital Santa Maria Maior, EPE",11952,Barcelos,2017,4070
+2017-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",23877,Vila do Conde,2017,5726
+2017-04-01,"Hospital Santa Maria Maior, EPE",15855,Barcelos,2017,3903
+2017-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",30077,Vila do Conde,2017,6200
+2017-05-01,"Hospital Santa Maria Maior, EPE",20035,Barcelos,2017,4180
+2017-06-01,"Hospital Santa Maria Maior, EPE",24282,Barcelos,2017,4247
+2017-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",36131,Vila do Conde,2017,6054
+2017-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",42155,Vila do Conde,2017,6024
+2017-07-01,"Hospital Santa Maria Maior, EPE",28588,Barcelos,2017,4306
+2017-08-01,"Hospital Santa Maria Maior, EPE",32921,Barcelos,2017,4333
+2017-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",48329,Vila do Conde,2017,6174
+2017-09-01,"Hospital Santa Maria Maior, EPE",36948,Barcelos,2017,4027
+2017-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",54051,Vila do Conde,2017,5722
+2017-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",60742,Vila do Conde,2017,6691
+2017-10-01,"Hospital Santa Maria Maior, EPE",41448,Barcelos,2017,4500
+2017-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",67289,Vila do Conde,2017,6547
+2017-11-01,"Hospital Santa Maria Maior, EPE",45674,Barcelos,2017,4226
+2017-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",74735,Vila do Conde,2017,7446
+2017-12-01,"Hospital Santa Maria Maior, EPE",50015,Barcelos,2017,4341
+2018-01-01,"Hospital Santa Maria Maior, EPE",4115,Barcelos,2018,4115
+2018-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6885,Vila do Conde,2018,6885
+2018-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",13131,Vila do Conde,2018,6246
+2018-02-01,"Hospital Santa Maria Maior, EPE",7862,Barcelos,2018,3747
+2018-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",19402,Vila do Conde,2018,6271
+2018-03-01,"Hospital Santa Maria Maior, EPE",11976,Barcelos,2018,4114
+2018-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",25438,Vila do Conde,2018,6036
+2018-04-01,"Hospital Santa Maria Maior, EPE",16142,Barcelos,2018,4166
+2018-05-01,"Hospital Santa Maria Maior, EPE",20314,Barcelos,2018,4172
+2018-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",31623,Vila do Conde,2018,6185
+2018-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",37470,Vila do Conde,2018,5847
+2018-06-01,"Hospital Santa Maria Maior, EPE",24346,Barcelos,2018,4032
+2018-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",43837,Vila do Conde,2018,6367
+2018-07-01,"Hospital Santa Maria Maior, EPE",28612,Barcelos,2018,4266
+2018-08-01,"Hospital Santa Maria Maior, EPE",33040,Barcelos,2018,4428
+2018-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",50351,Vila do Conde,2018,6514
+2018-09-01,"Hospital Santa Maria Maior, EPE",37176,Barcelos,2018,4136
+2018-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",56375,Vila do Conde,2018,6024
+2018-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",62667,Vila do Conde,2018,6292
+2018-10-01,"Hospital Santa Maria Maior, EPE",41388,Barcelos,2018,4212
+2018-11-01,"Hospital Santa Maria Maior, EPE",45128,Barcelos,2018,3740
+2018-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",68428,Vila do Conde,2018,5761
+2018-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",74639,Vila do Conde,2018,6211
+2018-12-01,"Hospital Santa Maria Maior, EPE",49157,Barcelos,2018,4029
+2019-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6580,Vila do Conde,2019,6580
+2019-01-01,"Hospital Santa Maria Maior, EPE",4114,Barcelos,2019,4114
+2019-02-01,"Hospital Santa Maria Maior, EPE",8122,Barcelos,2019,4008
+2019-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",12667,Vila do Conde,2019,6087
+2019-03-01,"Hospital Santa Maria Maior, EPE",12341,Barcelos,2019,4219
+2019-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",18719,Vila do Conde,2019,6052
+2019-04-01,"Hospital Santa Maria Maior, EPE",16291,Barcelos,2019,3950
+2019-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",24517,Vila do Conde,2019,5798
+2019-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",30493,Vila do Conde,2019,5976
+2019-05-01,"Hospital Santa Maria Maior, EPE",20427,Barcelos,2019,4136
+2019-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",36346,Vila do Conde,2019,5853
+2019-06-01,"Hospital Santa Maria Maior, EPE",24436,Barcelos,2019,4009
+2019-07-01,"Hospital Santa Maria Maior, EPE",28604,Barcelos,2019,4168
+2019-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",42236,Vila do Conde,2019,5890
+2019-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",48303,Vila do Conde,2019,6067
+2019-08-01,"Hospital Santa Maria Maior, EPE",32795,Barcelos,2019,4191
+2019-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",54063,Vila do Conde,2019,5760
+2019-09-01,"Hospital Santa Maria Maior, EPE",36905,Barcelos,2019,4110
+2019-10-01,"Hospital Santa Maria Maior, EPE",41211,Barcelos,2019,4306
+2019-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",60332,Vila do Conde,2019,6269
+2019-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",66407,Vila do Conde,2019,6075
+2019-11-01,"Hospital Santa Maria Maior, EPE",45184,Barcelos,2019,3973
+2019-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",73626,Vila do Conde,2019,7219
+2019-12-01,"Hospital Santa Maria Maior, EPE",49480,Barcelos,2019,4296
+2020-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6734,Vila do Conde,2020,6734
+2020-01-01,"Hospital Santa Maria Maior, EPE",4315,Barcelos,2020,4315
+2020-02-01,"Hospital Santa Maria Maior, EPE",8338,Barcelos,2020,4023
+2020-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",12664,Vila do Conde,2020,5930
+2020-03-01,"Hospital Santa Maria Maior, EPE",11090,Barcelos,2020,2752
+2020-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",16398,Vila do Conde,2020,3734
+2020-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",19330,Vila do Conde,2020,2932
+2020-04-01,"Hospital Santa Maria Maior, EPE",13305,Barcelos,2020,2215
+2020-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",22995,Vila do Conde,2020,3665
+2020-05-01,"Hospital Santa Maria Maior, EPE",16091,Barcelos,2020,2786
+2020-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",26870,Vila do Conde,2020,3875
+2020-06-01,"Hospital Santa Maria Maior, EPE",19215,Barcelos,2020,3124
+2020-07-01,"Hospital Santa Maria Maior, EPE",22789,Barcelos,2020,3574
+2020-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",31281,Vila do Conde,2020,4411
+2020-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",35771,Vila do Conde,2020,4490
+2020-08-01,"Hospital Santa Maria Maior, EPE",26342,Barcelos,2020,3553
+2020-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",40125,Vila do Conde,2020,4354
+2020-09-01,"Hospital Santa Maria Maior, EPE",29633,Barcelos,2020,3291
+2020-10-01,"Hospital Santa Maria Maior, EPE",32880,Barcelos,2020,3247
+2020-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",44716,Vila do Conde,2020,4591
+2020-11-01,"Hospital Santa Maria Maior, EPE",36229,Barcelos,2020,3349
+2020-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",49233,Vila do Conde,2020,4517
+2020-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",53343,Vila do Conde,2020,4110
+2020-12-01,"Hospital Santa Maria Maior, EPE",39546,Barcelos,2020,3317
+2021-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",4114,Vila do Conde,2021,4114
+2021-01-01,"Hospital Santa Maria Maior, EPE",3327,Barcelos,2021,3327
+2021-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6952,Vila do Conde,2021,2838
+2021-02-01,"Hospital Santa Maria Maior, EPE",5685,Barcelos,2021,2358
+2021-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",10643,Vila do Conde,2021,3691
+2021-03-01,"Hospital Santa Maria Maior, EPE",8708,Barcelos,2021,3023
+2021-04-01,"Hospital Santa Maria Maior, EPE",12139,Barcelos,2021,3431
+2021-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",14920,Vila do Conde,2021,4277
+2021-05-01,"Hospital Santa Maria Maior, EPE",16078,Barcelos,2021,3939
+2021-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",19827,Vila do Conde,2021,4907
+2021-06-01,"Hospital Santa Maria Maior, EPE",20077,Barcelos,2021,3999
+2021-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",25414,Vila do Conde,2021,5587
+2021-07-01,"Hospital Santa Maria Maior, EPE",24476,Barcelos,2021,4399
+2021-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",31396,Vila do Conde,2021,5982
+2021-08-01,"Hospital Santa Maria Maior, EPE",28934,Barcelos,2021,4458
+2021-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",37102,Vila do Conde,2021,5706
+2021-09-01,"Hospital Santa Maria Maior, EPE",33017,Barcelos,2021,4083
+2021-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",42637,Vila do Conde,2021,5535
+2021-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",48999,Vila do Conde,2021,6362
+2021-10-01,"Hospital Santa Maria Maior, EPE",37193,Barcelos,2021,4176
+2021-11-01,"Hospital Santa Maria Maior, EPE",41305,Barcelos,2021,4112
+2021-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",55007,Vila do Conde,2021,6008
+2021-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",60488,Vila do Conde,2021,5481
+2021-12-01,"Hospital Santa Maria Maior, EPE",45248,Barcelos,2021,3943
+2022-01-01,"Hospital Santa Maria Maior, EPE",4053,Barcelos,2022,4053
+2022-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",5699,Vila do Conde,2022,5699
+2022-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",10753,Vila do Conde,2022,5054
+2022-02-01,"Hospital Santa Maria Maior, EPE",7758,Barcelos,2022,3705
+2022-03-01,"Hospital Santa Maria Maior, EPE",12193,Barcelos,2022,4435
+2022-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",16996,Vila do Conde,2022,6243
+2022-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",23023,Vila do Conde,2022,6027
+2022-04-01,"Hospital Santa Maria Maior, EPE",16348,Barcelos,2022,4155
+2022-05-01,"Hospital Santa Maria Maior, EPE",21267,Barcelos,2022,4919
+2022-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",30143,Vila do Conde,2022,7120
+2022-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",36205,Vila do Conde,2022,6062
+2022-06-01,"Hospital Santa Maria Maior, EPE",25715,Barcelos,2022,4448
+2022-07-01,"Hospital Santa Maria Maior, EPE",30271,Barcelos,2022,4556
+2022-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",42603,Vila do Conde,2022,6398
+2022-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",48609,Vila do Conde,2022,6006
+2022-08-01,"Hospital Santa Maria Maior, EPE",34621,Barcelos,2022,4350
+2022-09-01,"Hospital Santa Maria Maior, EPE",38914,Barcelos,2022,4293
+2022-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",54161,Vila do Conde,2022,5552
+2022-10-01,"Hospital Santa Maria Maior, EPE",43644,Barcelos,2022,4730
+2022-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",61076,Vila do Conde,2022,6915
+2022-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",67910,Vila do Conde,2022,6834
+2022-11-01,"Hospital Santa Maria Maior, EPE",48180,Barcelos,2022,4536
+2022-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",73960,Vila do Conde,2022,6050
+2022-12-01,"Hospital Santa Maria Maior, EPE",52724,Barcelos,2022,4544
+2023-01-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",6052,Vila do Conde,2023,6052
+2023-01-01,"Hospital Santa Maria Maior, EPE",4378,Barcelos,2023,4378
+2023-02-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",11678,Vila do Conde,2023,5626
+2023-02-01,"Hospital Santa Maria Maior, EPE",8572,Barcelos,2023,4194
+2023-03-01,"Hospital Santa Maria Maior, EPE",13139,Barcelos,2023,4567
+2023-03-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",17979,Vila do Conde,2023,6301
+2023-04-01,"Hospital Santa Maria Maior, EPE",17477,Barcelos,2023,4338
+2023-04-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",23617,Vila do Conde,2023,5638
+2023-05-01,"Hospital Santa Maria Maior, EPE",22134,Barcelos,2023,4657
+2023-05-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",29916,Vila do Conde,2023,6299
+2023-06-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",35688,Vila do Conde,2023,5772
+2023-06-01,"Hospital Santa Maria Maior, EPE",26749,Barcelos,2023,4615
+2023-07-01,"Hospital Santa Maria Maior, EPE",31722,Barcelos,2023,4973
+2023-07-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",41388,Vila do Conde,2023,5700
+2023-08-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",46997,Vila do Conde,2023,5609
+2023-08-01,"Hospital Santa Maria Maior, EPE",36795,Barcelos,2023,5073
+2023-09-01,"Hospital Santa Maria Maior, EPE",41245,Barcelos,2023,4450
+2023-09-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",52994,Vila do Conde,2023,5997
+2023-10-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",59140,Vila do Conde,2023,6146
+2023-10-01,"Hospital Santa Maria Maior, EPE",45221,Barcelos,2023,3976
+2023-11-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",65490,Vila do Conde,2023,6350
+2023-11-01,"Hospital Santa Maria Maior, EPE",48960,Barcelos,2023,3739
+2023-12-01,"Hospital Santa Maria Maior, EPE",53500,Barcelos,2023,4540
+2023-12-01,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE",72262,Vila do Conde,2023,6772
+2024-01-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",5536,Vila do Conde,2024,5536
+2024-01-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",4162,Barcelos,2024,4162
+2024-02-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",11014,Vila do Conde,2024,5478
+2024-02-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",8199,Barcelos,2024,4037
+2024-03-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",17147,Vila do Conde,2024,6133
+2024-03-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",12732,Barcelos,2024,4533
+2024-04-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",17158,Barcelos,2024,4426
+2024-04-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",23064,Vila do Conde,2024,5917
+2024-05-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",28934,Vila do Conde,2024,5870
+2024-05-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",21831,Barcelos,2024,4673
+2024-06-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",34415,Vila do Conde,2024,5481
+2024-06-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",26377,Barcelos,2024,4546
+2024-07-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",31055,Barcelos,2024,4678
+2024-07-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",39915,Vila do Conde,2024,5500
+2024-08-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",45147,Vila do Conde,2024,5232
+2024-08-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",35753,Barcelos,2024,4698
+2024-09-01,"Unidade Local de Saúde de Barcelos/Esposende, EPE",39909,Barcelos,2024,4156
+2024-09-01,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE",50192,Vila do Conde,2024,5045
