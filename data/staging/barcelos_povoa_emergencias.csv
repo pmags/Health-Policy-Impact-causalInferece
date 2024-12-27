@@ -1,82 +1,161 @@
 periodo,periodo_format_2,regiao,instituicao,localizacao_geografica,urgencias_geral,urgencias_pediatricas,urgencia_obstetricia,urgencia_psiquiatrica,total_urgencias
+2013-01,2013-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4484,2873,NA,NA,7357
 2013-02,2013-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",14069,NA,NA,NA,14069
 2013-03,2013-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",20404,NA,NA,NA,20404
+2013-08,2013-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",34427,14111,NA,NA,48538
+2013-09,2013-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",38535,15401,NA,NA,53936
 2013-10,2013-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",65229,NA,NA,NA,65229
 2013-12,2013-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",78471,NA,NA,NA,78471
+2014-01,2014-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4466,2191,NA,NA,6657
+2014-12,2014-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",48824,18949,NA,NA,67773
 2015-01,2015-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",7333,NA,NA,NA,7333
 2015-03,2015-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",19178,NA,NA,NA,19178
+2015-03,2015-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12148,5210,NA,NA,17358
+2015-07,2015-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",28094,10974,NA,NA,39068
 2015-11,2015-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",66976,NA,NA,NA,66976
 2016-01,2016-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6145,NA,NA,NA,6145
+2016-01,2016-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4278,1396,NA,NA,5674
+2016-02,2016-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8304,3063,NA,NA,11367
 2016-03,2016-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",18607,NA,NA,NA,18607
+2016-08,2016-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",35368,11402,NA,NA,46770
 2016-09,2016-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",55806,NA,NA,NA,55806
+2016-10,2016-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",44331,13910,NA,NA,58241
 2017-02,2017-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",11839,NA,NA,NA,11839
+2017-02,2017-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",7882,2925,NA,NA,10807
+2017-06,2017-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",24282,8106,NA,NA,32388
+2017-08,2017-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",32921,10162,NA,NA,43083
+2017-09,2017-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",36948,11285,NA,NA,48233
 2017-12,2017-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",74735,NA,NA,NA,74735
+2018-01,2018-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4115,1647,NA,NA,5762
 2018-02,2018-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",13131,NA,NA,NA,13131
+2018-05,2018-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",20314,6994,NA,NA,27308
+2018-09,2018-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",37176,11240,NA,NA,48416
 2018-12,2018-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",74639,NA,NA,NA,74639
+2019-03,2019-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12341,4025,NA,NA,16366
 2019-06,2019-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",36346,NA,NA,NA,36346
+2019-07,2019-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",28604,8239,NA,NA,36843
+2019-10,2019-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",41211,11131,NA,NA,52342
 2020-01,2020-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6734,NA,NA,NA,6734
+2020-03,2020-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",11090,3501,NA,NA,14591
 2020-04,2020-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",19330,NA,NA,NA,19330
 2020-05,2020-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",22995,NA,NA,NA,22995
+2020-07,2020-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",22789,4397,NA,NA,27186
 2020-09,2020-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",40125,NA,NA,NA,40125
 2020-12,2020-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",53343,NA,NA,NA,53343
 2021-02,2021-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6952,NA,NA,NA,6952
+2021-04,2021-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12139,1147,NA,NA,13286
+2021-09,2021-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",33017,5039,NA,NA,38056
+2022-01,2022-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4053,736,NA,NA,4789
+2022-03,2022-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12193,3035,NA,NA,15228
 2022-04,2022-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",23023,NA,NA,NA,23023
 2022-06,2022-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",36205,NA,NA,NA,36205
+2022-10,2022-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",43644,10934,NA,NA,54578
 2022-12,2022-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",73960,NA,NA,NA,73960
+2023-07,2023-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",31722,7560,NA,NA,39282
+2023-09,2023-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",41245,9071,NA,NA,50316
 2023-10,2023-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",59140,NA,NA,NA,59140
 2023-11,2023-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",65490,NA,NA,NA,65490
+2023-12,2023-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",53500,13092,NA,NA,66592
 2024-05,2024-05-01,Região de Saúde Norte,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE","41.383183, -8.758784",28934,NA,NA,NA,28934
 2024-07,2024-07-01,Região de Saúde Norte,"Unidade Local de Saúde de Barcelos/Esposende, EPE","41.533438, -8.616604",31055,8751,NA,NA,39806
+2013-05,2013-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",21144,9700,NA,NA,30844
+2013-06,2013-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",25443,11500,NA,NA,36943
 2014-02,2014-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",13136,NA,NA,NA,13136
 2014-06,2014-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",38291,NA,NA,NA,38291
+2014-07,2014-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",28853,11628,NA,NA,40481
+2014-08,2014-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",33032,12771,NA,NA,45803
 2014-11,2014-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",69164,NA,NA,NA,69164
+2015-04,2015-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",15953,6638,NA,NA,22591
 2015-07,2015-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",43163,NA,NA,NA,43163
+2015-08,2015-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",32132,12051,NA,NA,44183
 2015-10,2015-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",60827,NA,NA,NA,60827
 2015-12,2015-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",73551,NA,NA,NA,73551
 2016-02,2016-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",12015,NA,NA,NA,12015
 2016-05,2016-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",31624,NA,NA,NA,31624
+2016-06,2016-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",25919,9260,NA,NA,35179
 2016-07,2016-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",43876,NA,NA,NA,43876
+2016-07,2016-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",30729,10514,NA,NA,41243
 2016-10,2016-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",61990,NA,NA,NA,61990
 2016-11,2016-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",68040,NA,NA,NA,68040
 2017-04,2017-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",23877,NA,NA,NA,23877
 2017-05,2017-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",30077,NA,NA,NA,30077
 2017-06,2017-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",36131,NA,NA,NA,36131
 2017-10,2017-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",60742,NA,NA,NA,60742
+2018-02,2018-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",7862,2970,NA,NA,10832
 2018-03,2018-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",19402,NA,NA,NA,19402
 2018-06,2018-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",37470,NA,NA,NA,37470
+2019-02,2019-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8122,2863,NA,NA,10985
 2019-05,2019-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",30493,NA,NA,NA,30493
+2019-05,2019-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",20427,6169,NA,NA,26596
 2019-11,2019-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",66407,NA,NA,NA,66407
+2020-02,2020-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8338,2977,NA,NA,11315
+2020-05,2020-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16091,3844,NA,NA,19935
 2020-07,2020-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",31281,NA,NA,NA,31281
 2020-08,2020-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",35771,NA,NA,NA,35771
+2020-10,2020-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",32880,5416,NA,NA,38296
+2020-11,2020-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",36229,5770,NA,NA,41999
 2021-03,2021-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",10643,NA,NA,NA,10643
+2021-05,2021-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16078,1750,NA,NA,17828
+2021-07,2021-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",24476,3550,NA,NA,28026
+2021-08,2021-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",28934,4217,NA,NA,33151
 2021-10,2021-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",48999,NA,NA,NA,48999
+2021-10,2021-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",37193,6403,NA,NA,43596
 2022-01,2022-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",5699,NA,NA,NA,5699
 2022-02,2022-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",10753,NA,NA,NA,10753
+2022-05,2022-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",21267,5719,NA,NA,26986
 2022-11,2022-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",67910,NA,NA,NA,67910
 2023-02,2023-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",11678,NA,NA,NA,11678
+2023-02,2023-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8572,2478,NA,NA,11050
+2023-05,2023-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",22134,5652,NA,NA,27786
 2023-08,2023-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",46997,NA,NA,NA,46997
+2023-08,2023-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",36795,8249,NA,NA,45044
 2023-12,2023-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",72262,NA,NA,NA,72262
+2013-11,2013-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",46591,18608,NA,NA,65199
 2014-01,2014-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",7265,NA,NA,NA,7265
+2014-02,2014-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8286,3863,NA,NA,12149
+2014-03,2014-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12415,5513,NA,NA,17928
 2014-04,2014-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",25673,NA,NA,NA,25673
 2014-05,2014-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",32019,NA,NA,NA,32019
 2014-09,2014-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",56565,NA,NA,NA,56565
+2014-09,2014-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",36964,13886,NA,NA,50850
+2015-05,2015-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",19920,8206,NA,NA,28126
 2015-06,2015-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",37114,NA,NA,NA,37114
+2015-09,2015-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",35976,13189,NA,NA,49165
+2015-10,2015-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",40147,14748,NA,NA,54895
+2015-12,2015-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",48930,17766,NA,NA,66696
 2016-04,2016-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",25049,NA,NA,NA,25049
+2016-04,2016-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",17123,6497,NA,NA,23620
+2016-05,2016-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",21654,8009,NA,NA,29663
 2016-12,2016-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",74777,NA,NA,NA,74777
+2016-12,2016-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",52674,17077,NA,NA,69751
 2017-01,2017-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6362,NA,NA,NA,6362
+2017-01,2017-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4188,1545,NA,NA,5733
 2017-07,2017-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",42155,NA,NA,NA,42155
 2017-08,2017-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",48329,NA,NA,NA,48329
+2018-03,2018-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",11976,4371,NA,NA,16347
 2018-04,2018-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",25438,NA,NA,NA,25438
+2018-06,2018-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",24346,8140,NA,NA,32486
 2018-07,2018-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",43837,NA,NA,NA,43837
+2018-08,2018-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",33040,10247,NA,NA,43287
+2018-11,2018-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",45128,13818,NA,NA,58946
 2019-02,2019-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",12667,NA,NA,NA,12667
 2019-07,2019-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",42236,NA,NA,NA,42236
 2019-08,2019-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",48303,NA,NA,NA,48303
 2020-06,2020-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",26870,NA,NA,NA,26870
+2020-09,2020-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",29633,5041,NA,NA,34674
 2021-01,2021-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",4114,NA,NA,NA,4114
+2021-01,2021-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",3327,263,NA,NA,3590
+2021-06,2021-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",20077,2615,NA,NA,22692
+2021-11,2021-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",41305,7780,NA,NA,49085
 2021-12,2021-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",60488,NA,NA,NA,60488
+2022-06,2022-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",25715,6929,NA,NA,32644
 2022-10,2022-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",61076,NA,NA,NA,61076
+2022-12,2022-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",52724,14296,NA,NA,67020
 2023-01,2023-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6052,NA,NA,NA,6052
+2023-03,2023-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",13139,3762,NA,NA,16901
 2023-07,2023-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",41388,NA,NA,NA,41388
+2023-10,2023-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",45221,10216,NA,NA,55437
+2023-11,2023-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",48960,11557,NA,NA,60517
 2024-02,2024-02-01,Região de Saúde Norte,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE","41.383183, -8.758784",11014,NA,NA,NA,11014
 2024-03,2024-03-01,Região de Saúde Norte,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE","41.383183, -8.758784",17147,NA,NA,NA,17147
 2024-04,2024-04-01,Região de Saúde Norte,"Unidade Local de Saúde de Barcelos/Esposende, EPE","41.533438, -8.616604",17158,5093,NA,NA,22251
@@ -87,61 +166,114 @@ periodo,periodo_format_2,regiao,instituicao,localizacao_geografica,urgencias_ger
 2024-07,2024-07-01,Região de Saúde Norte,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE","41.383183, -8.758784",39915,NA,NA,NA,39915
 2024-08,2024-08-01,Região de Saúde Norte,"Unidade Local de Saúde de Barcelos/Esposende, EPE","41.533438, -8.616604",35753,9647,NA,NA,45400
 2013-01,2013-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",7724,NA,NA,NA,7724
+2013-03,2013-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12731,6416,NA,NA,19147
 2013-06,2013-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",38879,NA,NA,NA,38879
+2013-07,2013-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",29986,12919,NA,NA,42905
 2013-08,2013-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",52493,NA,NA,NA,52493
 2013-09,2013-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",58559,NA,NA,NA,58559
+2013-10,2013-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",42704,16947,NA,NA,59651
 2013-11,2013-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",71548,NA,NA,NA,71548
+2013-12,2013-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",50996,20344,NA,NA,71340
+2014-04,2014-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16572,6995,NA,NA,23567
+2014-06,2014-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",24721,10264,NA,NA,34985
 2014-07,2014-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",44522,NA,NA,NA,44522
 2014-10,2014-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",63029,NA,NA,NA,63029
 2014-12,2014-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",75851,NA,NA,NA,75851
+2015-01,2015-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4339,2155,NA,NA,6494
 2015-02,2015-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",12880,NA,NA,NA,12880
+2015-02,2015-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8064,3639,NA,NA,11703
+2015-06,2015-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",23929,9673,NA,NA,33602
 2015-08,2015-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",49166,NA,NA,NA,49166
+2016-11,2016-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",48370,15334,NA,NA,63704
 2017-03,2017-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",18151,NA,NA,NA,18151
+2017-03,2017-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",11952,4464,NA,NA,16416
+2017-07,2017-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",28588,9230,NA,NA,37818
+2017-10,2017-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",41448,12692,NA,NA,54140
+2017-12,2017-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",50015,16056,NA,NA,66071
 2018-01,2018-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6885,NA,NA,NA,6885
+2018-04,2018-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16142,5665,NA,NA,21807
 2018-08,2018-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",50351,NA,NA,NA,50351
 2018-10,2018-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",62667,NA,NA,NA,62667
 2018-11,2018-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",68428,NA,NA,NA,68428
+2018-12,2018-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",49157,15148,NA,NA,64305
 2019-01,2019-01-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",6580,NA,NA,NA,6580
+2019-01,2019-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4114,1380,NA,NA,5494
 2019-03,2019-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",18719,NA,NA,NA,18719
+2019-04,2019-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16291,5079,NA,NA,21370
+2019-08,2019-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",32795,9032,NA,NA,41827
 2019-09,2019-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",54063,NA,NA,NA,54063
+2019-09,2019-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",36905,9920,NA,NA,46825
 2019-10,2019-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",60332,NA,NA,NA,60332
 2019-12,2019-12-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",73626,NA,NA,NA,73626
+2019-12,2019-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",49480,14193,NA,NA,63673
+2020-01,2020-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4315,1570,NA,NA,5885
+2020-04,2020-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",13305,3647,NA,NA,16952
+2020-08,2020-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",26342,4684,NA,NA,31026
 2020-11,2020-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",49233,NA,NA,NA,49233
+2021-02,2021-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",5685,427,NA,NA,6112
+2021-03,2021-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8708,681,NA,NA,9389
 2021-04,2021-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",14920,NA,NA,NA,14920
 2021-05,2021-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",19827,NA,NA,NA,19827
 2021-08,2021-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",37102,NA,NA,NA,37102
 2021-09,2021-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",42637,NA,NA,NA,42637
 2021-11,2021-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",55007,NA,NA,NA,55007
+2021-12,2021-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",45248,8858,NA,NA,54106
+2022-04,2022-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16348,4218,NA,NA,20566
+2022-07,2022-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",30271,7966,NA,NA,38237
+2022-09,2022-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",38914,9539,NA,NA,48453
+2023-01,2023-01-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",4378,1251,NA,NA,5629
 2023-03,2023-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",17979,NA,NA,NA,17979
+2023-04,2023-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",17477,4647,NA,NA,22124
 2023-06,2023-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",35688,NA,NA,NA,35688
 2023-09,2023-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",52994,NA,NA,NA,52994
+2013-02,2013-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",8515,4755,NA,NA,13270
 2013-04,2013-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",26415,NA,NA,NA,26415
+2013-04,2013-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",16864,8022,NA,NA,24886
 2013-05,2013-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",32728,NA,NA,NA,32728
 2013-07,2013-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",45825,NA,NA,NA,45825
 2014-03,2014-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",19562,NA,NA,NA,19562
+2014-05,2014-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",20763,8671,NA,NA,29434
 2014-08,2014-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",50736,NA,NA,NA,50736
+2014-10,2014-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",41065,15434,NA,NA,56499
+2014-11,2014-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",44778,17098,NA,NA,61876
 2015-04,2015-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",24942,NA,NA,NA,24942
 2015-05,2015-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",31061,NA,NA,NA,31061
 2015-09,2015-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",54702,NA,NA,NA,54702
+2015-11,2015-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",44189,16513,NA,NA,60702
+2016-03,2016-03-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",12789,4987,NA,NA,17776
 2016-06,2016-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",37559,NA,NA,NA,37559
 2016-08,2016-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",50227,NA,NA,NA,50227
+2016-09,2016-09-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",39704,12429,NA,NA,52133
+2017-04,2017-04-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",15855,5690,NA,NA,21545
+2017-05,2017-05-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",20035,6889,NA,NA,26924
 2017-09,2017-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",54051,NA,NA,NA,54051
 2017-11,2017-11-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",67289,NA,NA,NA,67289
+2017-11,2017-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",45674,14152,NA,NA,59826
 2018-05,2018-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",31623,NA,NA,NA,31623
+2018-07,2018-07-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",28612,9256,NA,NA,37868
 2018-09,2018-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",56375,NA,NA,NA,56375
+2018-10,2018-10-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",41388,12623,NA,NA,54011
 2019-04,2019-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",24517,NA,NA,NA,24517
+2019-06,2019-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",24436,7206,NA,NA,31642
+2019-11,2019-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",45184,12411,NA,NA,57595
 2020-02,2020-02-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",12664,NA,NA,NA,12664
 2020-03,2020-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",16398,NA,NA,NA,16398
+2020-06,2020-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",19215,4058,NA,NA,23273
 2020-10,2020-10-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",44716,NA,NA,NA,44716
+2020-12,2020-12-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",39546,6046,NA,NA,45592
 2021-06,2021-06-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",25414,NA,NA,NA,25414
 2021-07,2021-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",31396,NA,NA,NA,31396
+2022-02,2022-02-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",7758,1586,NA,NA,9344
 2022-03,2022-03-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",16996,NA,NA,NA,16996
 2022-05,2022-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",30143,NA,NA,NA,30143
 2022-07,2022-07-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",42603,NA,NA,NA,42603
 2022-08,2022-08-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",48609,NA,NA,NA,48609
+2022-08,2022-08-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",34621,8728,NA,NA,43349
 2022-09,2022-09-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",54161,NA,NA,NA,54161
+2022-11,2022-11-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",48180,13083,NA,NA,61263
 2023-04,2023-04-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",23617,NA,NA,NA,23617
 2023-05,2023-05-01,Região de Saúde Norte,"Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE","41.3828711, -8.7589945",29916,NA,NA,NA,29916
+2023-06,2023-06-01,Região de Saúde Norte,"Hospital Santa Maria Maior, EPE","41.5324234, -8.6171561",26749,6597,NA,NA,33346
 2024-01,2024-01-01,Região de Saúde Norte,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE","41.383183, -8.758784",5536,NA,NA,NA,5536
 2024-02,2024-02-01,Região de Saúde Norte,"Unidade Local de Saúde de Barcelos/Esposende, EPE","41.533438, -8.616604",8199,2453,NA,NA,10652
 2024-04,2024-04-01,Região de Saúde Norte,"Unidade Local de Saúde da Póvoa de Varzim/Vila do Conde, EPE","41.383183, -8.758784",23064,NA,NA,NA,23064

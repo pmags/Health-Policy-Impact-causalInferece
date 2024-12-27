@@ -23,9 +23,11 @@ df <- read_delim(
   col_types = cols(Período.Format.2 = col_date(format = "%Y/%m/%d"))
   ) %>% clean_names()
 
+
+
 df <- filter(
   df,
-  str_detect(instituicao, "Póvoa|Barcelos")
+  str_detect(instituicao, "Centro Hospitalar Póvoa de Varzim|Hospital Santa Maria Maior|Unidade Local de Saúde da Póvoa de Varzim|Barcelos")
 )
 
 write_csv(df, "data/staging/barcelos_povoa_emergencias.csv")

@@ -1,0 +1,279 @@
+---
+title: "Exploratory Data Analysis"
+format: html
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+box::use(
+    readr[read_delim, cols, col_date, write_csv, read_csv],
+    dplyr[filter, group_by, summarise, n, select, mutate, case_when, lag, first, ungroup, arrange],
+    stringr[str_detect],
+    magrittr[`%>%`],
+    ggplot2[...],
+    lubridate[ymd, mdy, dmy, year, month, day],
+    forecast[...]
+)
+
+```
+
+```{r}
+
+df <- read_csv("./data/staging/barcelos_povoa_emergencias.csv")
+
+summary(df)
+
+```
+
+```{r}
+
+df %>% 
+    group_by(instituicao) %>% 
+    summarise(count = n())
+
+
+```
+
+This project focus only on data from the following institutions:
+
+- Hospital Santa Maria Maior, EPE in Barcelos
+- Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE
+
+This institutions were selected given the goal of the project which is to examine the impact of the new measures implemented by the government regarding access to emergency room in the national health system. This new system was tested for a period in Centro Hospitalar Póvoa de Varzim/Vila do Conde. Based on domain experts information, the Hospital Santa Maria Maior shares a number of characteristicas which make it a good a proxy of a control group since he was not part of the initial trial out.
+
+Data available includes different natures of emergencies, but in this study we will focus only in general emergencies. The dataset was exported from https://transparencia.sns.gov.pt/explore/dataset/atendimentos-por-tipo-de-urgencia-hospitalar-link/information/?sort=tempo. 
+
+From initial summary we conclude:
+- 264 entry points corresponding to the period between 2013-01-01 to 2024-09-01,
+- During this period both institutions changed their named therefore we need to merge labels.
+- There is no missing data for any time period
+- The values publicly available do not represent monthly emergencies but rather acumulated values and we will need calculate the monthly values
+
+```{r}
+
+df_curated <- df %>% 
+    select(data = periodo_format_2, instituicao, urgencias_geral) %>% 
+    mutate(
+        unidade_saude = case_when(
+            str_detect(instituicao, "Varzim") ~ "Vila do Conde",
+            TRUE ~ "Barcelos"
+        ),
+        data = ymd(data)
+    ) %>% 
+    arrange(data) %>% 
+    group_by(unidade_saude, year = year(data)) %>% 
+    mutate(urgencias_mensais = ifelse(
+        month(data) == 1, 
+        urgencias_geral, 
+        urgencias_geral - lag(urgencias_geral, default = first(urgencias_geral))) 
+    ) %>% 
+    ungroup()
+
+```
+
+## Initial Visualizations
+
+Focus of this study will the the health institution with an intervention
+
+```{r}
+
+df_curated %>% 
+    filter(unidade_saude == "Vila do Conde") %>% 
+    ggplot(aes(x = data, y = urgencias_mensais)) +
+    geom_line(color = "blue") +
+    theme_classic() +
+    labs(
+        title = "Episódios de Urgência na Unidade de Saúde de Póvoa de Varzim/Vila do Conde",
+        x = "",
+        y = ""
+    ) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+```{r}
+
+df_curated %>% 
+    ggplot(aes(x = data, y = urgencias_mensais, color = unidade_saude)) +
+    geom_line() +
+    theme_classic() +
+    labs(
+        title = "Episódios de Urgência na Unidade de Saúde de Póvoa de Varzim/Vila do Conde",
+        x = "",
+        y = "",
+        color = NULL
+    ) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    scale_color_manual(values = c("Vila do Conde" = "blue", "Barcelos" = "green")) +
+    theme(
+        axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = "bottom",
+        legend.direction = "horizontal"
+        )
+
+```
+
+```{r}
+
+df_curated %>% 
+    filter(
+        unidade_saude == "Vila do Conde",
+        year(data) %in% c("2013", "2014", "2015","2016")) %>% 
+    ggplot(aes(x = data, y = urgencias_mensais)) +
+    geom_line(color = "blue") +
+    theme_classic() +
+    labs(
+        title = "Episódios de Urgência na Unidade de Saúde de Póvoa de Varzim/Vila do Conde",
+        x = "",
+        y = ""
+    ) +
+    scale_x_date(date_breaks = "1 month", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+Initial visual analysis show that.
+
+- On a regular basis we have local maximuns around the end of the year. This is to be expected since its typically the colder time of the year and the high moment for the endemic flu,
+- The trend seems to be sable untill 2020 and 2021 impacted by the covid period. Covid emergencies seem to be excluded from this statistics which explain the sudden drop reflecting the time the normal emergency was closed.
+- In more recent months there seems to exist a downward trend. This becomes more visible when plotting both the quarter and semester moving average to smooth the effects,
+- Splitting before and after covid, its visible that we don't have a stable variance with years presenting a higher level of variance. We can also detect a somewhat polinomial trend with a decrease since 2013 to have an upward trend after 2018.
+- On the other hand, the after covid period implies a more pronounced downward trend in emergencies. The blue horizontal line marks the start of the new system trial period.
+
+```{r}
+
+df_curated %>% 
+    filter(
+        unidade_saude == "Vila do Conde"
+        ) %>% 
+    arrange(data) %>% 
+    group_by(unidade_saude) %>% 
+    mutate(
+        moving_avg_quarter = stats::filter(urgencias_mensais, rep(1/3, 3), sides = 1),
+        moving_avg_semester = stats::filter(urgencias_mensais, rep(1/6, 6), sides = 1)
+        ) %>% 
+    ungroup() %>% 
+    ggplot() +
+    geom_line(aes(x = data, y = moving_avg_quarter, color = "Quarter Moving Average")) +
+    geom_line(aes(x = data, y = moving_avg_semester, color = "Semester Moving Average")) +
+    theme_classic() +
+    labs(
+        title = "Moving Average of Urgência Episodes in Póvoa de Varzim/Vila do Conde Health Unit",
+        x = "",
+        y = "",
+        color = NULL
+    ) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(
+        axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = "bottom",
+        legend.direction = "horizontal"
+        )
+
+
+```
+
+```{r}
+
+## Before covid
+
+df_curated %>% 
+    filter(
+        unidade_saude == "Vila do Conde",
+        year(data) < 2020
+        ) %>% 
+    arrange(data) %>% 
+    group_by(unidade_saude) %>% 
+    mutate(
+        moving_avg_quarter = stats::filter(urgencias_mensais, rep(1/3, 3), sides = 1),
+        moving_avg_semester = stats::filter(urgencias_mensais, rep(1/6, 6), sides = 1)
+        ) %>% 
+    ungroup() %>% 
+    ggplot() +
+    geom_line(aes(x = data, y = moving_avg_quarter, color = "Quarter Moving Average")) +
+    geom_line(aes(x = data, y = moving_avg_semester, color = "Semester Moving Average")) +
+    theme_classic() +
+    labs(
+        title = "Moving Average of Urgência Episodes in Póvoa de Varzim/Vila do Conde Health Unit",
+        x = "",
+        y = "",
+        color = NULL
+    ) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(
+        axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = "bottom",
+        legend.direction = "horizontal"
+        )
+
+```
+
+```{r}
+
+## After covid
+
+df_curated %>% 
+    filter(
+        unidade_saude == "Vila do Conde",
+        year(data) > 2021
+        ) %>% 
+    arrange(data) %>% 
+    group_by(unidade_saude) %>% 
+    mutate(
+        moving_avg_quarter = stats::filter(urgencias_mensais, rep(1/3, 3), sides = 1),
+        moving_avg_semester = stats::filter(urgencias_mensais, rep(1/6, 6), sides = 1)
+        ) %>% 
+    ungroup() %>% 
+    ggplot() +
+    geom_line(aes(x = data, y = moving_avg_quarter, color = "Quarter Moving Average")) +
+    geom_line(aes(x = data, y = moving_avg_semester, color = "Semester Moving Average")) +
+    geom_vline(xintercept = as.Date("2024-01-01"), linetype = "dashed", color = "blue") +
+    theme_classic() +
+    labs(
+        title = "Moving Average of Urgência Episodes in Póvoa de Varzim/Vila do Conde Health Unit",
+        x = "",
+        y = "",
+        color = NULL
+    ) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(
+        axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = "bottom",
+        legend.direction = "horizontal"
+        )
+
+```
+
+**Assumptions:**
+
+For the context of this study we will assume the following:
+
+- Changes in naming at the start of 2024 do not reflect changes in nature of service provided, therefore we consider data from 2013 to 2024 to be comparable
+
+
+**Conclusions and next steps:**
+
+- To remove the covid effect on both series we will have to model the time period to replace
+- Both series will need to be detrended and show signs of seasonality. (at quarter and semester)
+- 
+
+
+```{r}
+
+df_filtered <-df_curated %>% 
+    filter(
+        unidade_saude == "Vila do Conde",
+        year(data) < 2020
+    )  %>% 
+    select(
+        data, urgencias_mensais
+    ) 
+
+# Convert to time series object
+ts_data <- ts(df_filtered$urgencias_mensais, frequency = 12)  # Assuming monthly data
+
+# Calculate and plot the ACF
+tsdisplay(ts_data)
+
+```
