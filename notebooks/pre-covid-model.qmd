@@ -1,5 +1,24 @@
 ---
-title: "Untitled"
+title: "Pre-covid timeseries model"
+execute:
+  echo: false
 format: html
 ---
 
+## Plan:
+
+Use box-jenkins approach
+
+1.  Explore visualy estacionarity and seasonality
+2.  explore differencing and box-cox transform
+3.  model p and q
+4.  Define test and train parts for cross validation
+5.  use mse and aic for selecting models
+
+Apply both this approach to barcelos and vila do conde.
+
+```{r}
+
+2+2 
+
+```

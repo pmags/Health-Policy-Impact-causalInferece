@@ -19,7 +19,7 @@ box::use(
 
 ```{r}
 
-df <- read_csv("./data/staging/barcelos_povoa_emergencias.csv")
+df <- read_csv("../data/staging/barcelos_povoa_emergencias.csv")
 
 summary(df)
 
@@ -36,18 +36,14 @@ df %>%
 
 This project focus only on data from the following institutions:
 
-- Hospital Santa Maria Maior, EPE in Barcelos
-- Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE
+-   Hospital Santa Maria Maior, EPE in Barcelos
+-   Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE
 
 This institutions were selected given the goal of the project which is to examine the impact of the new measures implemented by the government regarding access to emergency room in the national health system. This new system was tested for a period in Centro Hospitalar Póvoa de Varzim/Vila do Conde. Based on domain experts information, the Hospital Santa Maria Maior shares a number of characteristicas which make it a good a proxy of a control group since he was not part of the initial trial out.
 
-Data available includes different natures of emergencies, but in this study we will focus only in general emergencies. The dataset was exported from https://transparencia.sns.gov.pt/explore/dataset/atendimentos-por-tipo-de-urgencia-hospitalar-link/information/?sort=tempo. 
+Data available includes different natures of emergencies, but in this study we will focus only in general emergencies. The dataset was exported from https://transparencia.sns.gov.pt/explore/dataset/atendimentos-por-tipo-de-urgencia-hospitalar-link/information/?sort=tempo.
 
-From initial summary we conclude:
-- 264 entry points corresponding to the period between 2013-01-01 to 2024-09-01,
-- During this period both institutions changed their named therefore we need to merge labels.
-- There is no missing data for any time period
-- The values publicly available do not represent monthly emergencies but rather acumulated values and we will need calculate the monthly values
+From initial summary we conclude: - 264 entry points corresponding to the period between 2013-01-01 to 2024-09-01, - During this period both institutions changed their named therefore we need to merge labels. - There is no missing data for any time period - The values publicly available do not represent monthly emergencies but rather acumulated values and we will need calculate the monthly values
 
 ```{r}
 
@@ -135,11 +131,11 @@ df_curated %>%
 
 Initial visual analysis show that.
 
-- On a regular basis we have local maximuns around the end of the year. This is to be expected since its typically the colder time of the year and the high moment for the endemic flu,
-- The trend seems to be sable untill 2020 and 2021 impacted by the covid period. Covid emergencies seem to be excluded from this statistics which explain the sudden drop reflecting the time the normal emergency was closed.
-- In more recent months there seems to exist a downward trend. This becomes more visible when plotting both the quarter and semester moving average to smooth the effects,
-- Splitting before and after covid, its visible that we don't have a stable variance with years presenting a higher level of variance. We can also detect a somewhat polinomial trend with a decrease since 2013 to have an upward trend after 2018.
-- On the other hand, the after covid period implies a more pronounced downward trend in emergencies. The blue horizontal line marks the start of the new system trial period.
+-   On a regular basis we have local maximuns around the end of the year. This is to be expected since its typically the colder time of the year and the high moment for the endemic flu,
+-   The trend seems to be sable untill 2020 and 2021 impacted by the covid period. Covid emergencies seem to be excluded from this statistics which explain the sudden drop reflecting the time the normal emergency was closed.
+-   In more recent months there seems to exist a downward trend. This becomes more visible when plotting both the quarter and semester moving average to smooth the effects,
+-   Splitting before and after covid, its visible that we don't have a stable variance with years presenting a higher level of variance. We can also detect a somewhat polinomial trend with a decrease since 2013 to have an upward trend after 2018.
+-   On the other hand, the after covid period implies a more pronounced downward trend in emergencies. The blue horizontal line marks the start of the new system trial period.
 
 ```{r}
 
@@ -249,15 +245,13 @@ df_curated %>%
 
 For the context of this study we will assume the following:
 
-- Changes in naming at the start of 2024 do not reflect changes in nature of service provided, therefore we consider data from 2013 to 2024 to be comparable
-
+-   Changes in naming at the start of 2024 do not reflect changes in nature of service provided, therefore we consider data from 2013 to 2024 to be comparable
 
 **Conclusions and next steps:**
 
-- To remove the covid effect on both series we will have to model the time period to replace
-- Both series will need to be detrended and show signs of seasonality. (at quarter and semester)
-- 
-
+-   To remove the covid effect on both series we will have to model the time period to replace
+-   Both series will need to be detrended and show signs of seasonality. (at quarter and semester)
+-   
 
 ```{r}
 
