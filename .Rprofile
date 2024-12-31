@@ -33,5 +33,6 @@ options(radian.completion_timeout = 0.05)
 options(radian.insert_new_line = FALSE)
 
 options(radian.escape_key_map = list(
-          list(key = "-", value = " <- ")
+          list(key = "-", value = " <- "),
+          list(key = "ctrl+shift+m", value = " %>% ")
         ))

@@ -1,24 +1,305 @@
 ---
-title: "Pre-covid timeseries model"
-execute:
-  echo: false
+title: "pre-covid model"
 format: html
 ---
 
-## Plan:
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
-Use box-jenkins approach
+box::use(
+    readr[read_delim, cols, col_date, write_csv, read_csv],
+    dplyr[filter, group_by, summarise, n, select, mutate, case_when, lag, first, ungroup, arrange, pull],
+    tidyr[nest, unnest],
+    stringr[str_detect],
+    magrittr[`%>%`],
+    ggplot2[...],
+    gridExtra[grid.arrange],
+    lubridate[ymd, mdy, dmy, year, month, day],
+    forecast[...],
+    purrr[map, map2],
+    timetk[tk_ts],
+    tseries[adf.test, kpss.test]
+)
 
-1.  Explore visualy estacionarity and seasonality
-2.  explore differencing and box-cox transform
-3.  model p and q
-4.  Define test and train parts for cross validation
-5.  use mse and aic for selecting models
+```
 
-Apply both this approach to barcelos and vila do conde.
+We will build a model for emergencies appointements for both Vila do Conde and Barcelos. We will then use this model to replace the covid period for our future analysis. 
 
 ```{r}
 
-2+2 
+df <- read_csv("./data/transformed/tratadas_emergencias.csv")
+
+df <- df %>% filter(data < "2020-01-01") 
+
+df <- df %>% 
+    group_by(unidade_saude) %>% 
+    nest()
+
+
+```
+
+## Vila do Conde
+
+```{r}
+
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    unnest(cols = c(data)) %>%  
+    ggplot(aes(x = data, y = urgencias_mensais )) +
+    geom_line(color = "blue") +
+    theme_classic() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+```{r}
+
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    unnest(cols = c(data)) %>% 
+    pull(urgencias_mensais) %>% 
+    acf(lag.max = 50)
+
+```
+
+Initial visualizations show some signs of a seasonality with a regular high around te winter periods. It does show a sligth quadratic trend but is not very pronounced from this visualization, it shows high levels of variability therefore we will consider the log of the series.
+
+```{r}
+
+# Create time series for each serires
+
+df <- df %>% 
+    mutate(
+        data.ts = map(
+            .x = data,
+            .f = tk_ts,
+            select   = c(-data, -year, -urgencias_geral),
+            start = 2013,
+            freq = 12
+        )
+    )
+
+df
+```
+
+```{r}
+
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(data.ts) %>% 
+    .[[1]] %>% 
+    decompose(type = "additive") %>% 
+    autoplot() +
+    ggtitle("Vila do Conde")
+
+
+```
+
+```{r}
+
+df %>% 
+    filter(unidade_saude == "Barcelos") %>%
+    pull(data.ts) %>% 
+    .[[1]] %>% 
+    decompose(type = "additive") %>% 
+    autoplot() +
+    ggtitle("Vila do Conde")
+
+```
+
+## Reducing variability
+
+```{r}
+
+df_transform <- df %>% 
+    mutate(
+        boxcox.lambda = map(data.ts, BoxCox.lambda),
+        data.ts.box = map2(
+            .x = data.ts,
+            .y = boxcox.lambda,
+            .f = ~BoxCox(.x, .y))
+        )
+
+```
+
+```{r}
+
+df_transform  %>% 
+    filter(unidade_saude == "Barcelos") %>%
+    pull(data.ts.box) %>% 
+    .[[1]] %>% 
+    autoplot()
+
+```
+
+```{r}
+
+df_transform <- df_transform %>% 
+    mutate(
+        stat.diffseason = map(.x = data.ts.box, nsdiffs),
+        stat.diff6 = map(.x = data.ts.box,.f = ~ndiffs(diff(.x, 6))),
+        stat.diff12 = map(.x = data.ts.box,.f = ~ndiffs(diff(.x, 12))),
+        diff1 = map(.x = data.ts.box, .f = ~diff(.x, 1)),
+        diff6 = map(.x = data.ts.box, .f = ~diff(.x, 6)),
+        diff12 = map(.x = data.ts.box, .f = ~diff(.x, 12)),
+        diff6.1 = map(.x = data.ts.box, .f = ~diff(diff(.x, 6),1)),
+        diff12.1 = map(.x = data.ts.box, .f = ~diff(diff(.x, 12),1))
+    )
+
+```
+
+```{r}
+
+pl1 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(data.ts.box) %>% 
+    .[[1]] %>% 
+    autoplot() + 
+    ggtitle("Vila do conde")
+
+
+pl2 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff1) %>% 
+    .[[1]] %>% 
+    autoplot() + 
+    ggtitle("Vila do conde diff1")
+
+pl3 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff6) %>% 
+    .[[1]] %>% 
+    autoplot() + 
+    ggtitle("Vila do conde diff6")
+
+pl4 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff12) %>% 
+    .[[1]] %>% 
+    autoplot() + 
+    ggtitle("Vila do conde diff12")
+
+pl5 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff6.1) %>% 
+    .[[1]] %>% 
+    autoplot() + 
+    ggtitle("Vila do conde diff6.1")
+
+pl6 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff12.1) %>% 
+    .[[1]] %>% 
+    autoplot() + 
+    ggtitle("Vila do conde diff12.1")
+
+grid.arrange(pl1,pl2,pl3,pl4,pl5,pl6, ncol = 2)
+
+```
+
+```{r}
+
+acf1 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(data.ts.box) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Vila do Conde")
+
+acf2 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff1) %>% 
+    .[[1]] %>%
+    ggtsdisplay(main = "Vila do Conde diff1")
+
+acf3 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff6) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Vila do Conde diff6")
+
+acf4 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff12) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Vila do Conde diff12")
+
+acf5 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff6.1) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Vila do Conde diff6.1")
+
+acf6 <- df_transform  %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(diff12.1) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Vila do Conde diff12.1")
+
+
+
+```
+
+## Split data
+
+```{r}
+
+df_train_test <- df_transform %>% 
+    mutate(
+        train = map(
+            .x = diff1,
+            .f = ~window(.x, end = c(2019, 10))
+        ),
+        test = map(
+            .x = diff1,
+            .f = ~window(.x, start = c(2019, 11)) 
+        )
+    )
+
+df_train_test
+
+```
+
+```{r}
+
+
+tr_pl <- df_train_test %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(train) %>% 
+    .[[1]] %>% 
+    autoplot()
+
+layer <- df_train_test %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(test) %>% 
+    .[[1]] %>% 
+    autolayer()
+
+tr_pl + layer
+
+```
+
+
+```{r}
+
+kpss.test(df_transform$diff1[[1]])
+adf.test(df_transform$diff1[[1]])
+
+```
+
+```{r}
+
+df_train_test <- df_train_test %>% 
+    mutate(
+        model.fit = map(.x = train, ~auto.arima(.x)),
+        test.forecast = map2(.x = model.fit ,.y = test , .f = ~forecast(.x, h = length(.y))),
+        test.mse = map2(.x = test.forecast , .y = test, .f = ~mean((.x$mean - .y)^2)) 
+    )
+
+```
+
+```{r}
+
+model_vc <- auto.arima(df_train_test$train[[1]])
+model_barcelos <- auto.arima(df_train_test$train[[2]])
 
 ```
