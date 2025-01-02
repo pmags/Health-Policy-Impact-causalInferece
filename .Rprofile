@@ -18,6 +18,10 @@ if (nzchar(system.file(package = "box.lsp"))) {
   )
 }
 
+if (requireNamespace("here", quietly = TRUE)) {
+  setwd(here::here())
+}
+
 # auto match brackets and quotes
 options(radian.auto_match = TRUE)
 
@@ -34,5 +38,5 @@ options(radian.insert_new_line = FALSE)
 
 options(radian.escape_key_map = list(
           list(key = "-", value = " <- "),
-          list(key = "ctrl+shift+m", value = " %>% ")
+          list(key = "ctrl+M", value = " %>% ")
         ))

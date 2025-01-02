@@ -13,7 +13,7 @@
             "packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev,chromium,libproj-dev,gdal-bin,libgdal-dev"
         },
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-            "packages": "github::rstudio/renv,here,httpgd,box,ggplot2,lintr,forecast"
+            "packages": "github::rstudio/renv,here,httpgd,box,ggplot2,lintr,forecast,timetk,rticles"
         },
 		"ghcr.io/rocker-org/devcontainer-features/rstudio-server": {},
         "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {}
@@ -30,7 +30,7 @@
 	],
 
 	"postAttachCommand": {
-        "rstudio-start": "rserver"
+        "rstudio-start": "quarto install tinytex && rserver"
     },
     "forwardPorts": [
         8787
@@ -48,7 +48,8 @@
 				"oderwat.indent-rainbow",
 				"GitHub.vscode-pull-request-github",
 				"GitHub.vscode-github-actions",
-				"GitHub.codespaces"
+				"GitHub.codespaces",
+				"tomoki1207.pdf"
 			]
         },
         "codespaces": {

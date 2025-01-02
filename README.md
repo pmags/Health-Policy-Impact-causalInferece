@@ -8,3 +8,5 @@ Add the following into .Rprofile
 
 
 https://momentoseconomicos.com/2024/12/18/sobre-o-programa-ligue-antes-salve-vidas/
+
+quarto render pre-covid-model.qmd --to pdf

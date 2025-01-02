@@ -1,6 +1,22 @@
 ---
 title: "pre-covid model"
+execute:
+    echo: false
 format: html
+#author:
+#  - name: Alice Anonymous
+#    email: alice@example.com
+#    affiliation: Some Institute of Technology
+#abstract: |
+#  This is the abstract.
+#  It consists of two paragraphs.
+#format:
+#    pdf: default
+#    elsevier-pdf:
+#        keep-tex: false
+#        echo: false
+#        fig-format: png
+#        layout: onecolumn
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
@@ -8,281 +24,266 @@ format: html
 box::use(
     readr[read_delim, cols, col_date, write_csv, read_csv],
     dplyr[filter, group_by, summarise, n, select, mutate, case_when, lag, first, ungroup, arrange, pull],
-    tidyr[nest, unnest],
+    tidyr[nest, unnest, pivot_wider,pivot_longer],
     stringr[str_detect],
     magrittr[`%>%`],
     ggplot2[...],
     gridExtra[grid.arrange],
+    grid[textGrob, gpar],
     lubridate[ymd, mdy, dmy, year, month, day],
     forecast[...],
     purrr[map, map2],
     timetk[tk_ts],
-    tseries[adf.test, kpss.test]
+    tseries[adf.test, kpss.test],
+    broom[tidy]
 )
 
 ```
 
-We will build a model for emergencies appointements for both Vila do Conde and Barcelos. We will then use this model to replace the covid period for our future analysis. 
+## Exploring pre-covid data
 
-```{r}
+The covid pandemic reached Portugal around February 2020 and impacted most of 2020 and 2021. In order to remove this outlier effect from the dataset we will forecast emergency occurrences out of avaiable informtion from years prior. We will use available information to fit a Sarima model. 
+
+Since we plan to use Barcelos information to create a counter factual for Vila do Conde we will apply a similar approach to both locations.
+
+```{r "import data", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+## Filters by date and nest by location
 
 df <- read_csv("./data/transformed/tratadas_emergencias.csv")
 
 df <- df %>% filter(data < "2020-01-01") 
 
-df <- df %>% 
+df <- df %>%  
     group_by(unidade_saude) %>% 
-    nest()
-
-
-```
-
-## Vila do Conde
-
-```{r}
-
-df %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    unnest(cols = c(data)) %>%  
-    ggplot(aes(x = data, y = urgencias_mensais )) +
-    geom_line(color = "blue") +
-    theme_classic() +
-    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-```
-
-```{r}
-
-df %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    unnest(cols = c(data)) %>% 
-    pull(urgencias_mensais) %>% 
-    acf(lag.max = 50)
-
-```
-
-Initial visualizations show some signs of a seasonality with a regular high around te winter periods. It does show a sligth quadratic trend but is not very pronounced from this visualization, it shows high levels of variability therefore we will consider the log of the series.
-
-```{r}
-
-# Create time series for each serires
-
-df <- df %>% 
+    mutate(series.returns = log(urgencias_mensais / lag(urgencias_mensais))) %>% 
+    nest(.key = "series") %>% 
     mutate(
-        data.ts = map(
-            .x = data,
+        series.ts = map(
+            .x = series,
             .f = tk_ts,
-            select   = c(-data, -year, -urgencias_geral),
+            select = c(-instituicao, -year, -urgencias_geral, -data, -series.returns),
+            start = 2013,
+            freq = 12
+        ),
+        returns.ts = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -urgencias_mensais),
             start = 2013,
             freq = 12
         )
     )
 
-df
 ```
 
-```{r}
+```{r "initial visualizations", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
-df %>% 
+vc_plt <- df %>% 
     filter(unidade_saude == "Vila do Conde") %>%
-    pull(data.ts) %>% 
-    .[[1]] %>% 
-    decompose(type = "additive") %>% 
-    autoplot() +
-    ggtitle("Vila do Conde")
+    unnest(cols = c(series)) %>%  
+    ggplot( aes(x = data, y = urgencias_mensais)) +
+    geom_line(color = "blue") +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Vila do Conde",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
 
-
-```
-
-```{r}
-
-df %>% 
+bar_plt <- df %>% 
     filter(unidade_saude == "Barcelos") %>%
-    pull(data.ts) %>% 
-    .[[1]] %>% 
-    decompose(type = "additive") %>% 
-    autoplot() +
-    ggtitle("Vila do Conde")
+    unnest(cols = c(series)) %>%  
+    ggplot(aes(x = data, y = urgencias_mensais )) +
+    geom_line(color = "green") +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Barcelos",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
 
-```
-
-## Reducing variability
-
-```{r}
-
-df_transform <- df %>% 
-    mutate(
-        boxcox.lambda = map(data.ts, BoxCox.lambda),
-        data.ts.box = map2(
-            .x = data.ts,
-            .y = boxcox.lambda,
-            .f = ~BoxCox(.x, .y))
-        )
-
-```
-
-```{r}
-
-df_transform  %>% 
-    filter(unidade_saude == "Barcelos") %>%
-    pull(data.ts.box) %>% 
-    .[[1]] %>% 
-    autoplot()
-
-```
-
-```{r}
-
-df_transform <- df_transform %>% 
-    mutate(
-        stat.diffseason = map(.x = data.ts.box, nsdiffs),
-        stat.diff6 = map(.x = data.ts.box,.f = ~ndiffs(diff(.x, 6))),
-        stat.diff12 = map(.x = data.ts.box,.f = ~ndiffs(diff(.x, 12))),
-        diff1 = map(.x = data.ts.box, .f = ~diff(.x, 1)),
-        diff6 = map(.x = data.ts.box, .f = ~diff(.x, 6)),
-        diff12 = map(.x = data.ts.box, .f = ~diff(.x, 12)),
-        diff6.1 = map(.x = data.ts.box, .f = ~diff(diff(.x, 6),1)),
-        diff12.1 = map(.x = data.ts.box, .f = ~diff(diff(.x, 12),1))
+grid.arrange(
+    vc_plt, 
+    bar_plt, 
+    nrow = 2,
+    bottom = textGrob("Note: plots are not showing with the same axis", gp = gpar(fontsize = 10, fontface = "italic"))
     )
 
 ```
 
-```{r}
+Initial visualization for this time series are not clear in terms of trend and variability. There some local maximum around the end of each year for both locations which is consistent with flu seasons. This points out to a year seasonality which is aligned with domain knowledge, but multiple seasons might exist.
 
-pl1 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(data.ts.box) %>% 
-    .[[1]] %>% 
-    autoplot() + 
-    ggtitle("Vila do conde")
+At first glance, Vila do conde seems to show a slight downhard trend towards 2016 and a raise unrill the end to the of the series, while Barcelos seems to present an increse during the year of 2016. This changes can result from external factors like a more agressive seasonal flu season or changes in the service (eg: number of doctors available) and are out of scope
 
+In order to model this series we will apply Box-Jenkins Methodology.
 
-pl2 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff1) %>% 
-    .[[1]] %>% 
-    autoplot() + 
-    ggtitle("Vila do conde diff1")
+### Exploring stationarity
 
-pl3 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff6) %>% 
-    .[[1]] %>% 
-    autoplot() + 
-    ggtitle("Vila do conde diff6")
+```{r "stationarity test", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
-pl4 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff12) %>% 
-    .[[1]] %>% 
-    autoplot() + 
-    ggtitle("Vila do conde diff12")
-
-pl5 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff6.1) %>% 
-    .[[1]] %>% 
-    autoplot() + 
-    ggtitle("Vila do conde diff6.1")
-
-pl6 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff12.1) %>% 
-    .[[1]] %>% 
-    autoplot() + 
-    ggtitle("Vila do conde diff12.1")
-
-grid.arrange(pl1,pl2,pl3,pl4,pl5,pl6, ncol = 2)
+df <- df %>% 
+    mutate(
+        adf.test = map(
+            .x = series.ts,
+            .f = adf.test
+        ),
+        kpss.test = map(
+            .x = series.ts,
+            .f = kpss.test
+        ),
+        adf.returns.test = map(
+            .x = returns.ts,
+            .f = ~adf.test(na.omit(.x))
+        ),
+        kpss.returns.test = map(
+            .x = returns.ts,
+            .f = ~kpss.test(na.omit(.x))
+        )
+    )
 
 ```
 
-```{r}
+Applying adf and kpss on the data available we get contraditory results with both tests failing to reject the null hypothesis and therefore resulting in a result when one points to the series being stationary and not the other. On the other end, as a result of some local maximumns is not easy to conclude about heterosticity, it might also point out to other extenal factors that impact this series. Given that the goal of our analysis is to study the impact of one intervention we are less concerned about point forecasts and more in variations, therefore we will study if applying the "returns" helps stabilize our series.
 
-acf1 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(data.ts.box) %>% 
-    .[[1]] %>% 
-    ggtsdisplay(main = "Vila do Conde")
+Considering the returns we get a consistent result with both tests pointing to both series being stationary. We will use this transformation as our time series for modeling.
 
-acf2 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff1) %>% 
-    .[[1]] %>%
-    ggtsdisplay(main = "Vila do Conde diff1")
+```{r "stationarity table", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
-acf3 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff6) %>% 
-    .[[1]] %>% 
-    ggtsdisplay(main = "Vila do Conde diff6")
-
-acf4 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff12) %>% 
-    .[[1]] %>% 
-    ggtsdisplay(main = "Vila do Conde diff12")
-
-acf5 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff6.1) %>% 
-    .[[1]] %>% 
-    ggtsdisplay(main = "Vila do Conde diff6.1")
-
-acf6 <- df_transform  %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(diff12.1) %>% 
-    .[[1]] %>% 
-    ggtsdisplay(main = "Vila do Conde diff12.1")
-
-
+df %>% 
+    select(unidade_saude, adf.returns.test, kpss.returns.test) %>% 
+    mutate(
+        adf.returns.test = map(adf.returns.test, tidy),
+        kpss.returns.test = map(kpss.returns.test, tidy)
+    ) %>% 
+    unnest(cols = c(adf.returns.test, kpss.returns.test), names_sep = "_") %>% 
+    pivot_longer(
+        cols = c(-unidade_saude,-adf.returns.test_method, -adf.returns.test_alternative,-kpss.returns.test_method),
+        names_to = c(".value", "test"),
+        names_sep = "_"
+    ) %>% 
+    select(-adf.returns.test_method, -adf.returns.test_alternative,-kpss.returns.test_method)
 
 ```
 
-## Split data
+### Exploring seasonality
 
-```{r}
+```{r "acf/pacf", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE }
 
-df_train_test <- df_transform %>% 
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(na.omit(returns.ts)) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Vila do Conde ACF/PACF", theme = theme_bw()) 
+
+df %>% 
+    filter(unidade_saude == "Barcelos") %>%
+        pull(na.omit(returns.ts)) %>% 
+    .[[1]] %>% 
+    ggtsdisplay(main = "Barcelos ACF/PACF", theme = theme_bw()) 
+
+```
+
+ACF shows significant correlation at the 6, 12, 18 and 24 lags on the other end PACF shows spikes at both 12 and 24 lags. This happens on both series implying the existence of both a 6 and 12 month seasonality.
+
+```{r "STL decompose", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(returns.ts) %>% 
+    .[[1]] %>% 
+    msts(seasonal.periods = c(6,12)) %>%  # Specify multiple seasonal periods
+    mstl(lambda = NULL, iterate = 4) %>% 
+    autoplot() +
+    ggtitle("Vila do Conde")
+
+df %>% 
+    filter(unidade_saude == "Barcelos") %>%
+    pull(returns.ts) %>% 
+    .[[1]] %>% 
+    msts(seasonal.periods = c(6,12)) %>% 
+    mstl(lambda = NULL, iterate = 4) %>% 
+    autoplot() +
+    ggtitle("Barcelos")
+
+```
+
+Using STL to remove seasonality show residuals closer to white noise with a mean around 0 but showing some outliers like January 2016 for Barcelos and February 2016 for Vila do Conde. We don't have enough data to conclude about what could be causing such spikes, and despite showing some signs of statistical outliers we see no reason to remove them.
+
+
+```{r "calculate diff", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+df <- df %>% 
+    mutate(
+        stat.diffseason = map(.x = returns.ts, nsdiffs),
+        stat.diff6 = map(.x = returns.ts,.f = ~ndiffs(diff(.x, 6))),
+        stat.diff12 = map(.x = returns.ts,.f = ~ndiffs(diff(.x, 12))),
+    )
+
+```
+
+```{r "residuals acf/pacf", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    pull(returns.ts) %>% 
+    .[[1]] %>% 
+    msts(seasonal.periods = c(6,12)) %>%  
+    mstl(lambda = NULL, iterate = 4) %>%
+    .[, "Remainder"] %>%  
+    ggtsdisplay(main = "Vila do Conde ACF/PACF of Residuals", theme = theme_bw())
+
+df %>% 
+    filter(unidade_saude == "Barcelos") %>%
+    pull(returns.ts) %>% 
+    .[[1]] %>% 
+    msts(seasonal.periods = c(6,12)) %>%  
+    mstl(lambda = NULL, iterate = 4) %>%
+    .[, "Remainder"] %>%  
+    ggtsdisplay(main = "Barcelos ACF/PACF of Residuals", theme = theme_bw())
+
+```
+
+## Models
+
+```{r "split train/tests", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+df <- df %>% 
     mutate(
         train = map(
-            .x = diff1,
+            .x = returns.ts,
             .f = ~window(.x, end = c(2019, 10))
         ),
         test = map(
-            .x = diff1,
+            .x = returns.ts,
             .f = ~window(.x, start = c(2019, 11)) 
         )
     )
 
-df_train_test
-
 ```
 
-```{r}
+```{r "model with multi seasonality", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
-
-tr_pl <- df_train_test %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(train) %>% 
-    .[[1]] %>% 
-    autoplot()
-
-layer <- df_train_test %>% 
-    filter(unidade_saude == "Vila do Conde") %>%
-    pull(test) %>% 
-    .[[1]] %>% 
-    autolayer()
-
-tr_pl + layer
-
-```
-
-
-```{r}
-
-kpss.test(df_transform$diff1[[1]])
-adf.test(df_transform$diff1[[1]])
+df %>% 
+    mutate(
+        fourier_terms = map(
+            .x = returns.ts,
+            .f = ~cbind(
+                fourier(msts(.x, seasonal.periods = c(6)), K=3),
+                fourier(msts(.x, seasonal.periods = c(12)), K=2)
+            )
+        )
+    )
 
 ```
 
@@ -297,9 +298,14 @@ df_train_test <- df_train_test %>%
 
 ```
 
+
 ```{r}
 
-model_vc <- auto.arima(df_train_test$train[[1]])
-model_barcelos <- auto.arima(df_train_test$train[[2]])
+t <- df_train_test %>% 
+    mutate(
+        forecast.covid =  map(.x = model.fit, .f = ~forecast(.x, h = 22))
+    )
+
+t$forecast.covid
 
 ```
