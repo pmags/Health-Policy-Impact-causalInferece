@@ -35,14 +35,15 @@ box::use(
     purrr[map, map2],
     timetk[tk_ts],
     tseries[adf.test, kpss.test],
-    broom[tidy]
+    broom[tidy],
+    astsa[...]
 )
 
 ```
 
 ## Exploring pre-covid data
 
-The covid pandemic reached Portugal around February 2020 and impacted most of 2020 and 2021. In order to remove this outlier effect from the dataset we will forecast emergency occurrences out of avaiable informtion from years prior. We will use available information to fit a Sarima model. 
+The covid pandemic reached Portugal around February 2020 and impacted most of 2020 and 2021. In order to remove this outlier effect from the dataset we will forecast emergency occurrences out of avaiable informtion from years prior. We will use available information to fit a Sarima model.
 
 Since we plan to use Barcelos information to create a counter factual for Vila do Conde we will apply a similar approach to both locations.
 
@@ -50,7 +51,7 @@ Since we plan to use Barcelos information to create a counter factual for Vila d
 
 ## Filters by date and nest by location
 
-df <- read_csv("./data/transformed/tratadas_emergencias.csv")
+df <- read_csv("../data/transformed/tratadas_emergencias.csv")
 
 df <- df %>% filter(data < "2020-01-01") 
 
@@ -220,7 +221,6 @@ df %>%
 
 Using STL to remove seasonality show residuals closer to white noise with a mean around 0 but showing some outliers like January 2016 for Barcelos and February 2016 for Vila do Conde. We don't have enough data to conclude about what could be causing such spikes, and despite showing some signs of statistical outliers we see no reason to remove them.
 
-
 ```{r "calculate diff", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
 df <- df %>% 
@@ -274,38 +274,104 @@ df <- df %>%
 
 ```{r "model with multi seasonality", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
 
-df %>% 
+model <- df %>% 
     mutate(
-        fourier_terms = map(
+        returns.ts.6 = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -urgencias_mensais),
+            start = 2013,
+            freq = 6
+        ),
+        fourier_terms = map2(
             .x = returns.ts,
+            .y = returns.ts.6,
             .f = ~cbind(
-                fourier(msts(.x, seasonal.periods = c(6)), K=3),
-                fourier(msts(.x, seasonal.periods = c(12)), K=2)
+              fourier(.x, K=2),
+              fourier(.y, K=2)
             )
+        ),
+        #model.fit = map2(
+        #    .x = train,
+        #    .y = fourier_terms,
+        #    .f = ~auto.arima(.x, xreg = .y[1:length(.x), , drop = FALSE])
+        #),
+        model.fit = map(.x = train, ~auto.arima(.x)),
+        model.all = map(.x =  returns.ts, ~auto.arima(.x)),
+        test.forecast = map2(.x = model.fit ,.y = test , .f = ~forecast(.x, h = length(.y))),
+        test.mse = map2(.x = test.forecast , .y = test, .f = ~mean((.x$mean - .y)^2)),
+        forecast.covid =  map(.x = model.all, .f = ~forecast(.x, h = 15))
+    )
+
+```
+
+```{r}
+
+model.barcelos <- model$model.fit[[1]]
+
+# Set up the plot layout
+par(mfrow = c(1, 2))
+
+
+# 2. ACF of residuals (similar to SARIMA diagnostics)
+acf(model.barcelos$residuals, main = "ACF of Residuals")
+
+# Perform Ljung-Box test for residuals at multiple lags (e.g., 1 to 24 lags)
+ljung_box_results <- sapply(1:24, function(lag) Box.test(model.barcelos$residuals, lag = lag, type = "Ljung-Box")$p.value)
+
+# Plot the Ljung-Box p-values
+ggplot(data.frame(Lag = 1:24, P_Value = ljung_box_results), aes(x = Lag, y = P_Value)) +
+  geom_point(stat = "identity", fill = "skyblue", color = "black") +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red") +  # Add a threshold line at 0.05
+  labs(title = "Ljung-Box Test for Residuals",
+       x = "Lag",
+       y = "P-Value") +
+  theme_bw()
+
+```
+
+```{r}
+
+vc_ts <- na.omit(df$returns.ts[[2]])
+astsa::sarima(vc_ts,1,0,1,0,1,1,12)
+
+bc_ts <- na.omit(df$returns.ts[[1]])
+astsa::sarima(vc_ts,1,0,1,1,1,1,12)
+```
+
+```{r}
+
+saveRDS(model, "../data/transformed/model_pre_covid.rds")
+
+```
+
+```{r}
+
+## Filters by date and nest by location
+
+pos_covid <- read_csv("../data/transformed/tratadas_emergencias.csv")
+
+pos_covid <- pos_covid %>% filter(year(data) == 2021) 
+
+pos_covid <- pos_covid %>%  
+    group_by(unidade_saude) %>% 
+    mutate(series.returns = log(urgencias_mensais / lag(urgencias_mensais))) %>% 
+    nest(.key = "series") %>% 
+    mutate(
+        series.ts = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -series.returns),
+            start = 2013,
+            freq = 12
+        ),
+        returns.ts = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -urgencias_mensais),
+            start = 2013,
+            freq = 12
         )
     )
-
-```
-
-```{r}
-
-df_train_test <- df_train_test %>% 
-    mutate(
-        model.fit = map(.x = train, ~auto.arima(.x)),
-        test.forecast = map2(.x = model.fit ,.y = test , .f = ~forecast(.x, h = length(.y))),
-        test.mse = map2(.x = test.forecast , .y = test, .f = ~mean((.x$mean - .y)^2)) 
-    )
-
-```
-
-
-```{r}
-
-t <- df_train_test %>% 
-    mutate(
-        forecast.covid =  map(.x = model.fit, .f = ~forecast(.x, h = 22))
-    )
-
-t$forecast.covid
 
 ```

@@ -1,0 +1,275 @@
+---
+title: "Post covid conter factual"
+format: html
+editor: visual
+---
+
+## Exploring a new time series
+
+```{r}
+
+box::use(
+  readr[read_delim, cols, col_date, write_csv, read_csv],
+  dplyr[filter, group_by, summarise, n, select, mutate, case_when, lag, first, ungroup, arrange, pull, inner_join, left_join],
+  tidyr[nest, unnest, pivot_wider,pivot_longer],
+  purrr[map, map2],
+  timetk[tk_ts, tk_tbl],
+  magrittr[`%>%`],
+  gridExtra[grid.arrange],
+  grid[textGrob, gpar],
+  ggplot2[...],
+  lubridate[ymd, mdy, dmy, year, month, day, ym],
+  forecast[...]
+)
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+all_data_df <- read_csv("../data/transformed/tratadas_emergencias.csv") %>% 
+  group_by(unidade_saude) %>% 
+  mutate(series.returns = log(urgencias_mensais / lag(urgencias_mensais))) %>% 
+  nest(.key = "series") %>% 
+  mutate(
+        returns.ts = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -urgencias_mensais),
+            start = 2013,
+            freq = 12
+        )
+  )
+
+
+pre_covid_df <- readRDS("../data/transformed/model_pre_covid.rds")
+
+df <- all_data_df %>%
+  inner_join(select(pre_covid_df, model.all, forecast.covid), by = "unidade_saude") %>% 
+  mutate(
+    returns.tibble = map(
+      .x = returns.ts,
+      .f = tk_tbl
+    ),
+    forecast.tibble = map(
+      .x = forecast.covid,
+      .f = ~tk_tbl(.x$mean)
+    ),
+    returns_corrected.tibble = map2(
+      .x = returns.tibble,
+      .y = forecast.tibble,
+      .f = ~{
+        merged = left_join(.x, .y, by = "index", suffix = c("_A", "_B")) %>% 
+          mutate(emergencias_mensais = ifelse(!is.na(value), value, series.returns)) 
+        
+        return(merged)
+      }
+    ) ,
+    returns_corrected.ts = map(
+      .x = returns_corrected.tibble,
+      .f = ~tk_ts(.x$emergencias_mensais, start = 2013, frequency = 12)
+    )
+  )
+
+```
+
+```{r}
+
+vc_plt <- df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    unnest(cols = c(series)) %>%  
+    ggplot( aes(x = data, y = urgencias_mensais)) +
+    geom_line(color = "blue") +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Vila do Conde",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
+
+bar_plt <- df %>% 
+    filter(unidade_saude == "Barcelos") %>%
+    unnest(cols = c(series)) %>%  
+    ggplot(aes(x = data, y = urgencias_mensais )) +
+    geom_line(color = "green") +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Barcelos",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
+
+grid.arrange(
+    vc_plt, 
+    bar_plt, 
+    nrow = 2,
+    bottom = textGrob("Note: plots are not showing with the same axis", gp = gpar(fontsize = 10, fontface = "italic"))
+    )
+```
+
+```{r}
+
+vc_plt <- df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    unnest(cols = c(returns_corrected.tibble)) %>%  
+    mutate(date = lubridate::ym(format(index, format = "%y-%m"))) %>%  
+    ggplot( aes(x = date, y = emergencias_mensais)) +
+    geom_line(color = "blue") +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Vila do Conde",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2020-01-01"), xmax = as.Date("2020-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
+    annotate("rect", xmin = as.Date("2022-01-01"), xmax = as.Date("2022-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
+    annotate("rect", xmin = as.Date("2024-01-01"), xmax = as.Date("2024-09-30"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
+
+bar_plt <- df %>% 
+    filter(unidade_saude == "Barcelos") %>%
+    unnest(cols = c(returns_corrected.tibble)) %>%  
+    mutate(date = lubridate::ym(format(index, format = "%y-%m"))) %>%  
+    ggplot( aes(x = date, y = emergencias_mensais)) +
+    geom_line(color = "green") +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Barcelos",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2020-01-01"), xmax = as.Date("2020-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
+    annotate("rect", xmin = as.Date("2022-01-01"), xmax = as.Date("2022-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
+    annotate("rect", xmin = as.Date("2024-01-01"), xmax = as.Date("2024-09-30"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")   
+
+grid.arrange(
+    vc_plt, 
+    bar_plt, 
+    nrow = 2,
+    bottom = textGrob("Note: plots are not showing with the same axis", gp = gpar(fontsize = 10, fontface = "italic"))
+    )
+
+```
+
+A fase inicial inicia-se em Janeiro 2024
+
+```{r}
+
+df <- df %>% 
+  mutate(
+    pre_intervention.ts = map(
+      .x = returns_corrected.ts,
+      .f = ~ window(.x, start = c(2013, 1), end = c(2023, 12))
+    ),
+    post_intervention.ts = map(
+      .x = returns_corrected.ts,
+      .f = ~ window(.x, start = c(2024, 1), end = c(2024, 9))
+    )
+  )
+  
+
+```
+
+```{r}
+
+# Assume `vila_do_conde` and `barcelos` are your time series
+vc <- na.omit(df$pre_intervention.ts[[2]])
+bc <- na.omit(df$pre_intervention.ts[[1]])
+
+fit_bc <- auto.arima(bc)
+
+# Step 1: Cross-Correlation Analysis
+ccf_results <- ccf( residuals(fit_bc), vc, lag.max = 24, main = "Cross-Correlation")
+
+```
+
+This indicates that **`vc`** is **leading** **`fit_bc`**. This means that changes in **`vc`** influence **`fit_bc`** with a 1-period delay.
+
+```{r}
+
+counter_factual.model <- auto.arima(
+  na.omit(df$pre_intervention.ts[[2]]), 
+  xreg = na.omit(df$pre_intervention.ts[[1]]), 
+  seasonal = TRUE
+  )
+
+```
+
+```{r}
+astsa::sarima(na.omit(df$pre_intervention.ts[[2]]),1,0,1,1,0,1,12, xreg = na.omit(df$pre_intervention.ts[[1]]))
+```
+
+```{r}
+
+counter_factual.ts <- forecast(counter_factual.model, h =9, xreg = na.omit(df$post_intervention.ts[[1]]))
+
+counter_factual.tibble <- tk_tbl(counter_factual.ts$mean) %>% mutate(date = lubridate::ym(format(index, format = "%y-%m")))
+
+```
+
+```{r}
+
+df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    unnest(cols = c(returns_corrected.tibble)) %>%  
+    mutate(date = lubridate::ym(format(index, format = "%y-%m"))) %>%  
+    ggplot( aes(x = date, y = emergencias_mensais)) +
+    geom_line(color = "blue") +
+    geom_line(
+          data = counter_factual.tibble,
+          aes(x = date, y = value),
+          color = "red"
+      ) +
+    geom_line(
+          data = filter(df, unidade_saude == "Barcelos") %>%
+                  unnest(cols = c(returns_corrected.tibble)) %>%  
+                  mutate(date = lubridate::ym(format(index, format = "%y-%m"))) %>% 
+                  filter(date >= "2024-01-01"),
+          aes(x = date, y = emergencias_mensais),
+          color = "green"
+      ) +
+    theme_bw() +
+    scale_x_date(date_breaks = "1 year", date_labels = "%m %Y") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(
+        title = "Vila do Conde",
+        subtitle = "Monthly emergency occurences",
+        x="",
+        y="") +
+    annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
+    annotate("rect", xmin = as.Date("2020-01-01"), xmax = as.Date("2020-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
+    annotate("rect", xmin = as.Date("2022-01-01"), xmax = as.Date("2022-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
+    annotate("rect", xmin = as.Date("2024-01-01"), xmax = as.Date("2024-09-30"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
+
+```
+
+```{r}
+
+df$returns.tibble[[2]] %>% 
+  mutate(date = lubridate::ym(format(index, format = "%y-%m"))) %>% 
+  filter(date >= "2024-01-01") %>% 
+  inner_join(counter_factual.tibble, by = "date") %>% 
+  mutate(diff.pp = (series.returns - value)*100) %>% 
+  summarise(mean = mean(diff.pp))
+
+```

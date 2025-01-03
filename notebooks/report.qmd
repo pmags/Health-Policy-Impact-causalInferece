@@ -1,0 +1,58 @@
+---
+title: "Evaluating the Impact of the New Triage Policy on Emergency Room Activity"
+author: "Pedro Miguel Sousa Magalhães"
+abstract: |
+  This study evaluates the impact of the new mandatory telephone pre-triage system on the number of emergency room visits. To assess this impact, publicly available emergency statistics from the Vila do Conde emergency room, one of the three hospitals involved in the trial, were used. Based on insights from domain experts, the emergency room in Barcelos served as a control group. The study focuses exclusively on the use of SARIMA models and transfer functions to develop a simple counterfactual as a quick means of identifying potential areas for further investigation.
+  The findings suggest that, although the intervention led to a reduction in emergency occurrences during the period from January 2024 to September 2024, the impact was modest. The study concludes with several additional questions that could help refine the analysis and motivate further research, potentially using more advanced modeling techniques
+format:
+    pdf: default
+    elsevier-pdf:
+        keep-tex: false
+        echo: false
+        fig-format: png
+        layout: onecolumn
+editor: visual
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+box::use(
+  logic/backend,
+  views/visuals
+)
+
+```
+
+```{r "running logic", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+
+t <- backend$import_data()
+
+```
+
+## Motivation
+
+High pressure on emergency rooms has been an ongoing concern for the Portuguese National Health System. This issue is particularly problematic during periods of high demand, such as winter, when pressure increases due to the endemic flu and other similar illnesses. In response, public health authorities implemented a mandatory telephone pre-triage system, which began with a trial in December 2023 at a limited number of locations. Alongside this, a new policy for referring patients to private hospitals was introduced. The mandatory pre-triage is now promoted as a cornerstone of the government's strategy to alleviate emergency room congestion.
+
+This study is motivated by an initial analysis conducted by Professor Pedro Pita Barros, an economics professor at Nova SBE and an expert in health economics, which was published on December 18, 2024. His analysis examined the emergency occurrences at the Unidade de Saúde of Vila do Conde (USL Vila do Conde), one of the trial locations, and tracked the evolution of emergency room visits after the mandatory pre-triage was introduced in January 2024. In his analysis, the city of Barcelos was used as a comparison group to assess the potential impact of the intervention.
+
+Building on this initial work, the present study aims to explore whether SARIMA models, incorporating an external variable informed by domain expert knowledge, can provide a rough evaluation of the intervention’s impact. Similar to Barros’ study, USL Barcelos will be used as a control group to generate a counterfactual, allowing us to assess the potential effect of the pre-triage system.
+
+While Barros’ article identified some limitations in the data and the analysis, particularly regarding the use of total monthly emergency visits as a proxy for impact, this study will not address these limitations directly. Instead, the focus here is on employing a different statistical approach to analyze the same data under similar assumptions. Throughout this study, additional assumptions and simplifications will be made, and these will be clearly outlined as we proceed.
+
+## Approach
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id orci vel nisi consequat faucibus. Sed tristique, sem in sodales malesuada, felis lacus tincidunt lorem, non bibendum eros erat nec libero. Integer volutpat mi sed eros rhoncus, sit amet tempus enim scelerisque. Nam ornare, libero sit amet posuere varius, nulla dolor tristique libero, nec placerat leo ipsum sed elit. Proin viverra felis et metus convallis, eu elementum sapien scelerisque. Sed non nisl ac orci consequat tincidunt. Integer ac turpis vel nisi viverra egestas non sit amet ante. Suspendisse potenti.
+
+Maecenas at suscipit turpis. Cras dictum risus at nunc luctus, sit amet tempor justo vestibulum. Nulla facilisi. Nulla vehicula interdum sollicitudin. Integer in dolor vel magna tincidunt luctus. Nam ut purus risus. Fusce non volutpat sem, in dignissim ex. Curabitur tincidunt dui nec purus tincidunt, ut facilisis lorem consequat. Phasellus vel lorem sit amet purus scelerisque gravida id non libero. In sagittis lectus at dui tristique, at vehicula magna efficitur. Fusce et sapien quis enim scelerisque consequat sit amet non quam.
+
+## Exploring the dataset
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id orci vel nisi consequat faucibus. Sed tristique, sem in sodales malesuada, felis lacus tincidunt lorem, non bibendum eros erat nec libero. Integer volutpat mi sed eros rhoncus, sit amet tempus enim scelerisque. Nam ornare, libero sit amet posuere varius, nulla dolor tristique libero, nec placerat leo ipsum sed elit. Proin viverra felis et metus convallis, eu elementum sapien scelerisque. Sed non nisl ac orci consequat tincidunt. Integer ac turpis vel nisi viverra egestas non sit amet ante. Suspendisse potenti.
+
+Maecenas at suscipit turpis. Cras dictum risus at nunc luctus, sit amet tempor justo vestibulum. Nulla facilisi. Nulla vehicula interdum sollicitudin. Integer in dolor vel magna tincidunt luctus. Nam ut purus risus. Fusce non volutpat sem, in dignissim ex. Curabitur tincidunt dui nec purus tincidunt, ut facilisis lorem consequat. Phasellus vel lorem sit amet purus scelerisque gravida id non libero. In sagittis lectus at dui tristique, at vehicula magna efficitur. Fusce et sapien quis enim scelerisque consequat sit amet non quam.
+
+## Post covid moment
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id orci vel nisi consequat faucibus. Sed tristique, sem in sodales malesuada, felis lacus tincidunt lorem, non bibendum eros erat nec libero. Integer volutpat mi sed eros rhoncus, sit amet tempus enim scelerisque. Nam ornare, libero sit amet posuere varius, nulla dolor tristique libero, nec placerat leo ipsum sed elit. Proin viverra felis et metus convallis, eu elementum sapien scelerisque. Sed non nisl ac orci consequat tincidunt. Integer ac turpis vel nisi viverra egestas non sit amet ante. Suspendisse potenti.
+
+Maecenas at suscipit turpis. Cras dictum risus at nunc luctus, sit amet tempor justo vestibulum. Nulla facilisi. Nulla vehicula interdum sollicitudin. Integer in dolor vel magna tincidunt luctus. Nam ut purus risus. Fusce non volutpat sem, in dignissim ex. Curabitur tincidunt dui nec purus tincidunt, ut facilisis lorem consequat. Phasellus vel lorem sit amet purus scelerisque gravida id non libero. In sagittis lectus at dui tristique, at vehicula magna efficitur. Fusce et sapien quis enim scelerisque consequat sit amet non quam.

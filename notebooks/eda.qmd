@@ -19,7 +19,7 @@ box::use(
 
 ```{r}
 
-df <- read_csv("./data/staging/barcelos_povoa_emergencias.csv")
+df <- read_csv("../data/staging/barcelos_povoa_emergencias.csv")
 
 summary(df)
 
