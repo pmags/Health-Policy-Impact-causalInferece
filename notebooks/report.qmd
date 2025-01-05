@@ -42,23 +42,23 @@ box::use(
 
 ## 1.1 Motivation
 
-High pressure on emergency rooms has been an ongoing concern for the Portuguese National Health System. This issue is particularly problematic during periods of high demand, such as winter, when pressure increases due to the endemic flu and other similar illnesses. In response, public health authorities implemented a mandatory telephone pre-triage system, which began with a trial in December 2023 at a limited number of locations. Alongside this, a new policy for referring patients to private hospitals was introduced. The mandatory pre-triage is now promoted as a cornerstone of the government's strategy to alleviate emergency room congestion.
+The high pressure on emergency rooms has long been a significant concern for the Portuguese National Health System. This issue becomes particularly problematic during periods of increased demand, such as the winter season, when the pressure is exacerbated by the seasonal flu and other similar illnesses. In response to these challenges, public health authorities introduced a mandatory telephone pre-triage system, which was initially trialed in December 2023 at a limited number of locations. Alongside this, a new policy was implemented to refer patients to private hospitals. The mandatory pre-triage system is now promoted as a central component of the government’s strategy to alleviate emergency room congestion.
 
-This study is motivated by an initial analysis conducted by Professor Pedro Pita Barros, an economics professor at Nova SBE and an expert in health economics, which was published on December 18, 2024. His analysis examined the emergency occurrences at the Unidade de Saúde of Vila do Conde (ULS Vila do Conde), one of the trial locations, and tracked the evolution of emergency room visits after the mandatory pre-triage was introduced in January 2024. In his analysis, the city of Barcelos was used as a comparison group to assess the potential impact of the intervention. [see @barros2024]
+This study is motivated by an initial analysis conducted by Professor Pedro Pita Barros, an economics professor at Nova SBE and a recognized expert in health economics. His analysis, published on December 18, 2024, examined emergency occurrences at the Unidade de Saúde de Vila do Conde (ULS Vila do Conde), one of the trial locations, and tracked the evolution of emergency room visits following the introduction of the mandatory pre-triage system in January 2024. In his study, the city of Barcelos was used as a comparison group to assess the potential impact of the intervention [see @barros2024].
 
-Building on this initial work, the present study aims to explore whether SARIMA models, incorporating an external variable informed by domain expert knowledge, can provide a rough evaluation of the intervention’s impact. Similar to Barros’ study, ULS Barcelos will be used as a control group to generate a counterfactual, allowing us to assess the potential effect of the pre-triage system.
+Building on this initial work, the present study aims to explore whether SARIMA models, incorporating an external variable informed by domain expert knowledge, can offer a preliminary evaluation of the intervention's impact. Similar to Barros’ study, ULS Barcelos will be used as a control group to generate a counterfactual, enabling the assessment of the potential effects of the pre-triage system.
 
-While Barros’ article identified some limitations in the data and the analysis, particularly regarding the use of total monthly emergency visits as a proxy for impact, this study will not address these limitations directly. Instead, the focus here is on employing a different statistical approach to analyze the same data under similar assumptions. Throughout this study, additional assumptions and simplifications will be made, and these will be clearly outlined as we proceed.
+While Barros’ article identified some limitations in both the data and analysis, particularly regarding the use of total monthly emergency visits as a proxy for the intervention’s impact, this study will not directly address these limitations. Instead, the focus here is on employing a different statistical approach to analyze the same data under similar assumptions. Additional assumptions and simplifications will be made throughout this study, and these will be clearly outlined as we progress.
 
 ## 1.2 Exploring data on emergencies for Vila do Conde and Barcelos
 
 This study focuses exclusively on data from two institutions:
 
-1.  **Hospital Santa Maria Maior, EPE**, which was renamed in 2024 to **Unidade Local de Saúde de Barcelos**.
+-   **Hospital Santa Maria Maior, EPE**, which was renamed in 2024 to **Unidade Local de Saúde de Barcelos**.
 
-2.  **Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE**, renamed in 2024 to **Unidade Local de Saúde de Póvoa de Varzim/Vila do Conde**.
+-   **Centro Hospitalar Póvoa de Varzim/Vila do Conde, EPE**, which was renamed in 2024 to **Unidade Local de Saúde de Póvoa de Varzim/Vila do Conde**.
 
-The dataset includes information on various types of emergencies. However, this analysis concentrates on **general emergencies**. The data was retrieved from the public portal of the Portuguese National Health Service at <https://transparencia.sns.gov.pt/explore/dataset/atendimentos-por-tipo-de-urgencia-hospitalar-link/information/?sort=tempo.>
+The dataset includes information on various types of emergency incidents. However, this analysis focuses specifically on general emergencies. The data was retrieved from the public portal of the Portuguese National Health Service at <https://transparencia.sns.gov.pt/explore/dataset/atendimentos-por-tipo-de-urgencia-hospitalar-link/information/?sort=tempo>.
 
 ```{r "initial visualization", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=6, fig.width=8, fig.cap="Monthly emergencies for both intervened and control series"}
 
@@ -71,16 +71,11 @@ grid.arrange(
   )
 ```
 
-An initial examination of the monthly emergency data for both locations revealed the following insights:
+There is a significant period of outlier behavior between January 2020 and April 2024, corresponding with the COVID-19 pandemic. This period caused substantial disruptions, which must be addressed before further modeling. The extended duration and magnitude of these anomalies require a strategy for outlier compensation.
 
-1.  **Impact of the COVID-19 Pandemic**:\
-    There is a significant period of outlier behavior between **January 2020 and April 2024**, coinciding with the COVID-19 pandemic. This period introduced substantial disruptions, which must be addressed before further modeling. The extended nature and magnitude of these anomalies necessitate a strategy for outlier compensation.
+**Seasonality:** The data exhibits signs of a **12-month seasonal pattern**, with local peaks typically occurring toward the end of each year.
 
-2.  **Seasonality**:\
-    The data exhibits indications of a **12-month seasonal pattern**, with local peaks typically occurring toward the end of each year.
-
-3.  **Trends**:\
-    While no clear overarching trend is apparent, there is a noticeable **continuous decrease in emergency occurrences in Vila do Conde** during the most recent months.
+**Trends:** Although no clear overarching trend is evident, there is a noticeable **continuous decrease in emergency occurrences** in Vila do Conde during the most recent months.
 
 ```{r "smoothing visualization", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=8, fig.width=8, fig.cap="Monthly emergencies smoothed by Quarter and Semester moving average"}
 
@@ -94,15 +89,17 @@ grid.arrange(
 
 ```
 
-Smoothing both series using 3 and 6 month moving average allows us to see the following:
+An initial examination of the monthly emergency data for both locations revealed the following insights:
 
--   The significant impact from the covid pandemic which seems to have had lingering effects with the series after that period showing trend and pattern changes afterwards,
+Smoothing both series using 3-month and 6-month moving averages highlights the following:
 
--   The pre covid series show a very tenues trend at best. Despite some periods like 2016 in Barcelos and 2018 in Vila do Conde, uppon initial visual inspection is not easy to distinguish a significant change in the series mean. This periods seem to be point in time interventions/outliers. Analysing each one is beyond the scope of this study,
+-   The significant impact of the COVID-19 pandemic, which seems to have had lingering effects, as the series after that period show changes in trend and patterns.
 
--   The period after the end of covid show chnages compared to the previous period implying that the covid pandemic lead to lingering effects in time. In the case of Vila do Conde a upward trend in 2012 seems to be followed by a downward trend starting 2013 (the mandatory pre-triaged intervention entered into effect starting January 2024). A quarter moving average below the semester implies that this trend prevails in time. On the other hand, Barcelos has shown a continuous upward trend since the end of the pandemic. The sharp fall during the end of 2023 seems again to be an outlier due to lack of practiticioners which lead to several emergency services to be close during this period. During 2024 Barcelos seem to show a sustainable upward trend.
+-   The pre-COVID series exhibited a very tenuous trend. Despite some periods, such as 2016 in Barcelos and 2018 in Vila do Conde, initial visual inspection reveals no clear significant change in the series mean. These periods appear to be point-in-time interventions or outliers. Analyzing each of these is beyond the scope of this study.
 
-One major give way from visual inspections is that both time series are not stationary. This is further confirmed by Kwiatkowski–Phillips–Schmidt–Shin (KPSS) and augmented Dickey–Fuller test (ADF). Given that the goal is to study the impact of an intervention/policy change in the rate of increase/decrease of emergencies transforming the main series to log rate of change allows to reach a similar goal with the added bonus of simplifying the modeling process. Being \$X\$ the random variable of monthly emergencies, we will therefore use for our analysis the following variable.
+-   The post-COVID period shows notable changes compared to the previous period, suggesting that the pandemic left lingering effects over time. In Vila do Conde, an upward trend in 2012 seems to have been followed by a downward trend starting in 2013 (the mandatory pre-triage intervention began in January 2024). A quarterly moving average below the semiannual average implies that this trend persists over time. In contrast, Barcelos has shown a continuous upward trend since the end of the pandemic. The sharp decline at the end of 2023 appears to be an outlier due to a shortage of practitioners, leading to the closure of several emergency services during that period. In 2024, Barcelos seems to demonstrate a sustainable upward trend.
+
+A major takeaway from the visual inspection is that both time series are **non-stationary**. This conclusion is further supported by the **Kwiatkowski–Phillips–Schmidt–Shin (KPSS)** and **Augmented Dickey–Fuller (ADF)** tests. Since the goal is to study the impact of an intervention or policy change on the rate of increase or decrease in emergency visits, transforming the main series into a **logarithmic rate of change** allows us to achieve a similar goal while simplifying the modeling process. Let \$X\$ represent the random variable of monthly emergencies, and we will use the following variable for our analysis.
 
 $$
 Z_{n} = ln(\frac{X_{n}}{X_{n-1}})
@@ -139,41 +136,41 @@ Fig show the transformed series with stationary despite the clear outlier moment
 
 ## 2.1 Approach
 
-**Intervention analysis**, introduced by Box and Tiao (1975), provides a framework for assessing the effect of an intervention on a time series under study. It is assumed that the intervention affects the process by changing the mean function or trend of a time series [@cryer2009 , pp. 249].
+Intervention analysis, introduced by Box and Tiao (1975), provides a framework for evaluating the effect of an intervention on a time series under study. The approach assumes that the intervention affects the process by altering the mean function or trend of the time series [@cryer2009 , pp. 249].
 
-Addressing the mandatory pre-triage as a new intervention would then be a valid approach. Given the nature of the intervention this would require that we would some how model not only the short term or immediate effects but also some spill over effects that would exists since such changes are expected to generate effects that linger in time with variable effects. On this occasion a simple step or pulse function wouldn't suffice in capturing the effect at end. On another hand there isn't enough domain knowledge that would allow to estimate all potential effects.
+In this context, addressing the mandatory pre-triage system as a new intervention is a valid approach. Given the nature of the intervention, it is necessary to model not only the short-term or immediate effects but also any spillover effects, as such changes are expected to generate lingering impacts over time with variable effects. A simple step or pulse function would not adequately capture the full scope of the intervention's impact. However, due to limited domain knowledge, it is not feasible to estimate all potential effects precisely.
 
-In this context Barros' article provides a valuable insights when it presents Barcelos as a related series which shared characteristics make it suitable to be used as a control group [see @barros2024]. It is important to notice that the use of another series in order to measure intervention impact in the scenario under study comes with some caveats, namely:
+Barros' article offers valuable insights by presenting Barcelos as a related series, with shared characteristics that make it a suitable control group for comparison [see @barros2024]. It is important to note, however, that using another series to measure the intervention's impact comes with certain caveats:
 
--   Barcelos emergencies were subject to local interventions namely do to hospital decisions which can impact the analysis. It will be assumed that any local intervention did not significantly impacted,
+-   **Local interventions in Barcelos:** Emergency services in Barcelos were subject to local interventions, such as decisions made by hospitals, which could influence the analysis. It will be assumed that these local interventions did not significantly affect the outcome of the study.
 
--   There are outlier on both series as seen before. This are due among other situations to cases of strikes or doctors shortage. For the sake of this study this periods won't be excluded or treated as outliers (for example using a pulse dummy variable and model it a an external variable). Therefore it's assumed, that, despite this effects exist, they won't impact the modeling process in a way that substantially impact the outcomes. This is a simplification and would require additional analysis outside the scope of the work at hand.
+-   **Outliers in both series:** As previously noted, both series contain outliers, which may be caused by events such as strikes or doctor shortages. For the purposes of this study, these periods will not be excluded or treated as outliers (e.g., using a pulse dummy variable and modeling it as an external variable). Therefore, it is assumed that, while these outliers exist, they will not substantially impact the modeling process or the final results. This is a simplification, and addressing these outliers would require additional analysis outside the scope of the current study.
 
 ### 2.1.1 Covid-19
 
-Both original and trasformed series (log returns) show a significant disruption during the covid-19 pandemic period. Available metadata is not enought to conclude if emergencies during this period are registered on a different dataset or if this two particular institutions were closed or limited during this time period. Nonetheless, and contrary to other periods of outlier identified on both series, the magnitude and duration of the impact does have a significant impact on any model generated out of this time series.
+Both the original and transformed (log returns) series show a significant disruption during the COVID-19 pandemic period. The available metadata is insufficient to determine whether emergencies during this period were recorded in a separate dataset or if these two institutions were closed or operating under limited capacity. However, unlike other periods of identified outliers in both series, the magnitude and duration of the COVID-19 impact are substantial enough to significantly affect any model generated from this time series.
 
-Again an intervention/outlier approach using external variables could prove useful here [@cryer2009 , pp. 257]. The goal is nonetheless to use historical data to infer on the existence of significant impact of a recent policy change. Under this circunstances the focus is on identifying strong trends and seasonality and not on particular past effects which are not repitable despite spill over effects they might have had. **Under this circunstance the covid effect will be "removed" from the series by "forecasting" the series between Jan 2020 and March 2021.**[^1]
+An intervention or outlier approach using external variables could be useful in this case[@cryer2009 , pp. 257]. However, the primary objective here is to use historical data to infer the existence of a significant impact from a recent policy change. Given these circumstances, the focus is on identifying strong trends and seasonality, rather than analyzing specific past effects, which, while influential, are not replicable despite any spillover effects they may have had. Therefore, the COVID-19 impact will be "removed" from the series by "forecasting" the data between January 2020 and March 2021.[^1]
 
 [^1]: It's important to notice that forecasting in order to reconstruct a period of a time series does introduce a substantial level of bias and noise to the analysis. Although it's assumed that this effect does not impact the outcome and conclusions, further analysis is required to validate this assumption in future works.
 
-## 2.2 Method used to assess intervention
+## 2.2 Methodology used to assess the intervention
 
-Given the goal proposed and the previous analysis and assumptions highlighted above, the impact of the **mandatory telephone pre-triage (henceforward also referred to as SNS24 triage) in ULS Vila do Conde** will be evaluated as follows:
+Given the proposed goal and the assumptions outlined in the previous analysis, the impact of the mandatory telephone pre-triage (hereafter referred to as **SNS24 triage**) at ULS Vila do Conde will be evaluated as follows:
 
--   A counter factual series will be forecasted out of Vila do Conde historical data and using Barcelos as an external variable with the role of a control group,
+1.  A counterfactual series will be forecasted using historical data from Vila do Conde, with **Barcelos** serving as an external variable and acting as a control group.
 
--   Series data from 2013 to 2020 will be used to replace the COVID-19 period from Jan 2020 to March 2021,
+2.  Data from 2013 to 2020 will be used to replace the COVID-19 period from January 2020 to March 2021.
 
--   The newly generated series for the period 2013-2023 will be used for fit a model to be used to generate a counter factual. Given the proposed objectives, there will be no smoothering between the real series 2013-2020 and the covid period replacement,
+3.  The newly generated series for the period 2013-2023 will be used to fit a model, which will then generate the counterfactual. Given the objectives of this study, no smoothing will be applied between the actual series from 2013 to 2020 and the COVID-19 replacement period.
 
-# 3. Counter-factual and measuring intervention
+# 3. Counterfactual and measuring intervention
 
 ## 3.1. Covid-19 outlier period
 
-Figure 4 and 5 isolate the series between February 2013 and December 2019 (original series includes January 2013 but given the transformation the first observation was removed to avoid 0 or infinite variations). As discussed earlier, both series show signes of oultliers namely around start 2014 and 2015.
+Figures 4 and 5 isolate the series between February 2013 and December 2019 (the original series includes January 2013, but the first observation was removed due to the transformation to avoid 0 or infinite variations). As discussed earlier, both series show signs of outliers, particularly around the start of 2014 and 2015.
 
-ACF and PACF show substantial correlation at 12 and 24 lags on both series sugesting a yearly series common with montly data and aligned to what to be expected given the nature of the dataset.
+The **Autocorrelation Function (ACF)** and **Partial Autocorrelation Function (PACF)** show substantial correlation at 12 and 24 lags in both series, suggesting a yearly pattern, consistent with monthly data. This aligns with expectations given the nature of the dataset.
 
 ```{r "VC ACF and PACF", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=6, fig.width=8, fig.cap="ACF and PACF for Vila do Conde log variation"}
 
@@ -203,7 +200,7 @@ preintervention$acf_pacf_diff(location = "Barcelos")
 
 ```
 
-Analysing both ACF/PACF and residuals a SARIMA(1,0,1) x (0,1,1)12 was used to model the pre-covid moment for Vila do Conde and a SARIMA(4,0,1) x (1,1,1)12 for Barcelos. Below the model statistics support this models as good approchimations for the reality under study. [^2]
+Analyzing both ACF/PACF and residuals a SARIMA(1,0,1) x (0,1,1)12 was used to model the pre-covid moment for Vila do Conde and a SARIMA(4,0,1) x (1,1,1)12 for Barcelos. Below the model statistics support this models as good approximations for the reality under study. [^2]
 
 [^2]: Further detail about pre-covid modeling can be found on appendix B.
 
@@ -233,9 +230,9 @@ grid.arrange(
 
 ```
 
-## 3.2. Fitting a counter factual
+## 3.2. Fitting a Counterfactual
 
-Having corrected the series between 2013 and September 2024 it's now necessary to confirm if the initial hypothesis backed by domain knowledge that Barcelos reflects a similar reality and therefore could be used as a control series really stands. Cross Correlation between both series show a strong correlation at lag 0, meaning that there is a strong instantaneous effect which validates the use of Barcelos as a candidate for a control group.
+After correcting the series from 2013 to September 2024, it is necessary to verify whether the initial hypothesis, supported by domain knowledge, that **Barcelos** reflects a similar reality and can thus serve as a valid control series, holds true. Cross-correlation between both series shows a strong correlation at lag 0, indicating a strong instantaneous effect. This confirms that Barcelos can be considered a suitable candidate for the control group.
 
 ```{r "ccf", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=4, fig.width=8, fig.cap="CCF between Barcelos and Vila do Conde"}
 
@@ -249,7 +246,9 @@ counter_factual$counter_factual_model()
 
 ```
 
-Fitting a model to a SARIMA (1,0,1) x (1,0,1) with a 12 month Seasonality and using ULS Barcelos as exogeneous variable produce a "good" enough model for the purpose of this analysis. Residuals show low correlation. A model as such can then produce a "theoretical" series for the period between January 2024 and September 2024 the only available period during the intervention. Visual inspections of Fig 14, show a that both the sample data and counter factual follow closely. A Welch two sample t-test confirm what intuitevely could be infered from the plot which is that both can be resulting from the same distribution since the null hypothesis (H0: difference in means equal 0) cannot be rejected.
+Fitting a **SARIMA (1,0,1) x (1,0,1)** model with a 12-month seasonality and using **ULS Barcelos** as an exogenous variable produces a "good enough" model for the purposes of this analysis. The residuals show low correlation, suggesting that the model is adequately fitting the data. This model can then generate a "theoretical" series for the period between January 2024 and September 2024, the only available period during the intervention.
+
+Visual inspection of **Figure 14** shows that both the sample data and the counterfactual closely follow one another. A **Welch two-sample t-test** confirms what can intuitively be inferred from the plot: both series are likely derived from the same distribution, as the null hypothesis (H0: difference in means = 0) cannot be rejected.
 
 ```{r "Conclusions", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=6, fig.width=8, fig.cap="Comparing impact"}
 
@@ -265,50 +264,20 @@ counter_factual$conclusion_test()
 
 # 4. Conclusion and future work
 
-Applying counter factual analysis to the implementation of a new health policy requiring a telephone pre-triage prior to visiting the emergency room has shown that, based on one of the test locations, no imediate impact has result from this new implementation. On other words, there was a high probability that the verified number of emergencies during the period of the test would still occurred if the intervention had not happen.
+The counterfactual analysis of the implementation of the new health policy requiring a telephone pre-triage before visiting the emergency room shows that, based on one of the test locations, there was no immediate impact from this new intervention. In other words, the number of emergencies observed during the trial period would likely have occurred even if the intervention had not been implemented.
 
-Despite the results obtained one should refrain to quickly conclude on the ineffective of such policies. As @barros2024 points on the article that motivated this study, there are additional considerations and questions should be consider before any conclusions such as:
+Despite these results, it is important not to hastily conclude the ineffectiveness of such policies. As highlighted by @barros2024 in the article that motivated this study, there are additional considerations and questions that should be addressed before drawing any conclusions, such as:
 
--   Is the number of emergencies the best metric to measure the impact of such intervention?
+-   Is the number of emergencies the best metric to measure the impact of such an intervention?
 
--   Do other locations which took part of the trial period present similar results?
+-   Do other locations that participated in the trial period show similar results?
 
--   In the event of a reduction to where the patients were sent?
+-   In the event of a reduction in emergencies, where were the patients redirected?
 
--   Does data reflect a like for like comparison reflecting a comparable situation between different moments (eg: same number of doctos and nurses)?
+-   Does the data reflect a like-for-like comparison, ensuring a comparable situation between different periods (e.g., same number of doctors and nurses)?
 
--   Both analysis focus on the mean (first moment) but shouldn't a scope of such policy also focus on the predictability of the random event (second moment)?
+-   While this analysis focuses on the mean (the first moment), shouldn’t the scope of such a policy also consider the predictability of random events (the second moment)?
 
-And the list goes on. At best this study with its simplied approach calls attention to the complexities and nuances of data analysis and impact analysis in the context of decision making and that first impressions can be deceive full.
-
-------------------------------------------------------------------------
-
-# Appendix A. Explore Data Analysis {.appendix}
-
-```{r}
-
-#visuals$stationary_tests_table()
-
-```
-
-# Appendix B. Replace Covid outlier {.appendix}
-
-## Pre-Covid data exploration
-
-Initial visualization for this time series are not clear in terms of trend and variability. There some local maximum around the end of each year for both locations which is consistent with flu seasons. This points out to a year seasonality which is aligned with domain knowledge, but multiple seasons might exist.
-
-At first glance, Vila do conde seems to show a slight downhard trend towards 2016 and a raise unrill the end to the of the series, while Barcelos seems to present an increse during the year of 2016. This changes can result from external factors like a more agressive seasonal flu season or changes in the service (eg: number of doctors available) and are out of scope
-
-## Stationarity and Heterostascity
-
-Applying adf and kpss on the data available we get contraditory results with both tests failing to reject the null hypothesis and therefore resulting in a result when one points to the series being stationary and not the other. On the other end, as a result of some local maximumns is not easy to conclude about heterosticity, it might also point out to other extenal factors that impact this series. Given that the goal of our analysis is to study the impact of one intervention we are less concerned about point forecasts and more in variations, therefore we will study if applying the "returns" helps stabilize our series.
-
-Considering the returns we get a consistent result with both tests pointing to both series being stationary. We will use this transformation as our time series for modeling.
-
-## Seasonality
-
-ACF shows significant correlation at the 6, 12, 18 and 24 lags on the other end PACF shows spikes at both 12 and 24 lags. This happens on both series implying the existence of both a 6 and 12 month seasonality.
-
-Using STL to remove seasonality show residuals closer to white noise with a mean around 0 but showing some outliers like January 2016 for Barcelos and February 2016 for Vila do Conde. We don't have enough data to conclude about what could be causing such spikes, and despite showing some signs of statistical outliers we see no reason to remove them.
+The list of considerations goes on. At best, this study, with its simplified approach, highlights the complexities and nuances of data and impact analysis in the context of decision-making. It serves as a reminder that first impressions can be misleading.
 
 # References
