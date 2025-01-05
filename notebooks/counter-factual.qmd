@@ -214,7 +214,7 @@ counter_factual.model <- auto.arima(
 ```
 
 ```{r}
-astsa::sarima(na.omit(df$pre_intervention.ts[[2]]),1,0,1,1,0,1,12, xreg = na.omit(df$pre_intervention.ts[[1]]))
+astsa::sarima(na.omit(df$pre_intervention.ts[[2]]),1,0,1,1,0,1,12, xreg = na.omit(df$pre_intervention.ts[[1]]), no.constant = TRUE)
 ```
 
 ```{r}
@@ -271,5 +271,11 @@ df$returns.tibble[[2]] %>%
   inner_join(counter_factual.tibble, by = "date") %>% 
   mutate(diff.pp = (series.returns - value)*100) %>% 
   summarise(mean = mean(diff.pp))
+
+```
+
+```{r}
+
+saveRDS(df, "../data/curated/conclusions.rds")
 
 ```

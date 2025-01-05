@@ -336,7 +336,7 @@ vc_ts <- na.omit(df$returns.ts[[2]])
 astsa::sarima(vc_ts,1,0,1,0,1,1,12)
 
 bc_ts <- na.omit(df$returns.ts[[1]])
-astsa::sarima(vc_ts,1,0,1,1,1,1,12)
+astsa::sarima(bc_ts,1,0,1,1,1,1,12)
 ```
 
 ```{r}

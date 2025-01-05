@@ -159,6 +159,16 @@
       ],
       "Hash": "c39f4155b3ceb1a9a2799d700fbd4b6a"
     },
+    "astsa": {
+      "Package": "astsa",
+      "Version": "2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "c8f1497fb1283233c4f357ebf3f8024a"
+    },
     "backports": {
       "Package": "backports",
       "Version": "1.5.0",
