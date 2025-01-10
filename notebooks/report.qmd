@@ -1,9 +1,16 @@
 ---
 title: "Evaluating the Impact of the New Triage Policy on Emergency Room Activity"
-author: "Pedro Miguel Sousa Magalhães"
+author: 
+  - name: "Pedro Miguel Sousa Magalhães"
+    email: up200202298@edu.fc.up.pt
+    id: 200202298
 abstract: |
   This study evaluates the impact of the new mandatory telephone pre-triage system on the number of emergency room visits. To assess this impact, publicly available emergency statistics from the Vila do Conde emergency room, one of the three hospitals involved in the trial, were used. Based on insights from domain experts, the emergency room in Barcelos served as a control group. The study focuses exclusively on the use of SARIMA models and transfer functions to develop a simple counterfactual as a quick means of identifying potential areas for further investigation.
   The findings suggest that, although the intervention led to a reduction in emergency occurrences during the period from January 2024 to September 2024, the impact was modest. The study concludes with several additional questions that could help refine the analysis and motivate further research, potentially using more advanced modeling techniques
+keywords:
+  - Time Series
+  - Causal Analysis
+  - Policy impatc
 format:
   pdf:
     keep-tex: false
@@ -44,11 +51,11 @@ box::use(
 
 The high pressure on emergency rooms has long been a significant concern for the Portuguese National Health System. This issue becomes particularly problematic during periods of increased demand, such as the winter season, when the pressure is exacerbated by the seasonal flu and other similar illnesses. In response to these challenges, public health authorities introduced a mandatory telephone pre-triage system, which was initially trialed in December 2023 at a limited number of locations. Alongside this, a new policy was implemented to refer patients to private hospitals. The mandatory pre-triage system is now promoted as a central component of the government’s strategy to alleviate emergency room congestion.
 
-This study is motivated by an initial analysis conducted by Professor Pedro Pita Barros, an economics professor at Nova SBE and a recognized expert in health economics. His analysis, published on December 18, 2024, examined emergency occurrences at the Unidade de Saúde de Vila do Conde (ULS Vila do Conde), one of the trial locations, and tracked the evolution of emergency room visits following the introduction of the mandatory pre-triage system in January 2024. In his study, the city of Barcelos was used as a comparison group to assess the potential impact of the intervention [see @barros2024].
+This study is motivated by an initial analysis conducted by Professor Pedro Pita Barros, an economics professor at Nova SBE and a recognized expert in health economics. His initial findings, published as a blog on December 18, 2024, examined emergency occurrences at the Unidade de Saúde de Vila do Conde (ULS Vila do Conde), one of the trial locations, and tracked the evolution of emergency room visits following the introduction of the mandatory pre-triage system in January 2024. In his study, the city of Barcelos was used as a comparison group to assess the potential impact of the intervention [see @barros2024]. **From this initial work he concludes that there evidence to support that the introduction of this new policy lead to a 10% drop in emergencies.**
 
-Building on this initial work, the present study aims to explore whether SARIMA models, incorporating an external variable informed by domain expert knowledge, can offer a preliminary evaluation of the intervention's impact. Similar to Barros’ study, ULS Barcelos will be used as a control group to generate a counterfactual, enabling the assessment of the potential effects of the pre-triage system.
+This study goal is to use traditional time series statistics to study the same data and compare if the results of a model driven analysis are aligned with the initial findings suggested by [@barros2024]. For this ARMA models will be used and later expanded using dynamic time series models to incorporate the effect of a reference series. **This study approach focus on using a counter-factual to simulate a series without any intervention and later compare to real measurements.** The goal is not to challenge or further support the 10% drop claim, instead, given the number of assumptions taken, is to conclude if indeed this intervention had any significant impact.
 
-While Barros’ article identified some limitations in both the data and analysis, particularly regarding the use of total monthly emergency visits as a proxy for the intervention’s impact, this study will not directly address these limitations. Instead, the focus here is on employing a different statistical approach to analyze the same data under similar assumptions. Additional assumptions and simplifications will be made throughout this study, and these will be clearly outlined as we progress.
+This analysis uses the exact same assumptions as [@barros2024] original post, namely the use of total emergencies as the relevant indicator and the assumption of ULS Barcelos as a reference series. In the conclusions some additional questions are risen regarding impacts and assumptions, namely if total emergencies is most appropriate indicator.
 
 ## 1.2 Exploring data on emergencies for Vila do Conde and Barcelos
 
@@ -170,6 +177,89 @@ Given the proposed goal and the assumptions outlined in the previous analysis, t
 
 Figures 4 and 5 isolate the series between February 2013 and December 2019 (the original series includes January 2013, but the first observation was removed due to the transformation to avoid 0 or infinite variations). As discussed earlier, both series show signs of outliers, particularly around the start of 2014 and 2015.
 
+In order to remove the unwanted effects of the covid period an ARMA model will be used to reconstruct both ULS Vila do Conde and ULS Barcelos series. The series used transformed to log variation and both adf and kpss test support the assumption of stationarity for the series untill January 2020 as seen on the table below.
+
+```{r "stationary_tes_appendix", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE,, fig.cap="Stationary tests"}
+
+box::use(
+    readr[read_delim, cols, col_date, write_csv, read_csv],
+    dplyr[filter, group_by, summarise, n, select, mutate, case_when, lag, first, ungroup, arrange, pull],
+    tidyr[nest, unnest, pivot_wider,pivot_longer],
+    stringr[str_detect],
+    magrittr[`%>%`],
+    ggplot2[...],
+    gridExtra[grid.arrange],
+    grid[textGrob, gpar],
+    lubridate[ymd, mdy, dmy, year, month, day],
+    forecast[...],
+    purrr[map, map2],
+    timetk[tk_ts],
+    tseries[adf.test, kpss.test],
+    broom[tidy],
+    astsa[...]
+)
+
+df <- read_csv("../data/transformed/tratadas_emergencias.csv")
+
+df <- df %>% filter(data < "2020-01-01") 
+
+df <- df %>%  
+    group_by(unidade_saude) %>% 
+    mutate(series.returns = log(urgencias_mensais / lag(urgencias_mensais))) %>% 
+    nest(.key = "series") %>% 
+    mutate(
+        series.ts = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -series.returns),
+            start = 2013,
+            freq = 12
+        ),
+        returns.ts = map(
+            .x = series,
+            .f = tk_ts,
+            select = c(-instituicao, -year, -urgencias_geral, -data, -urgencias_mensais),
+            start = 2013,
+            freq = 12
+        )
+    )
+
+df <- df %>% 
+    mutate(
+        adf.test = map(
+            .x = series.ts,
+            .f = adf.test
+        ),
+        kpss.test = map(
+            .x = series.ts,
+            .f = kpss.test
+        ),
+        adf.returns.test = map(
+            .x = returns.ts,
+            .f = ~adf.test(na.omit(.x))
+        ),
+        kpss.returns.test = map(
+            .x = returns.ts,
+            .f = ~kpss.test(na.omit(.x))
+        )
+    )
+
+df %>% 
+    select(unidade_saude, adf.returns.test, kpss.returns.test) %>% 
+    mutate(
+        adf.returns.test = map(adf.returns.test, tidy),
+        kpss.returns.test = map(kpss.returns.test, tidy)
+    ) %>% 
+    unnest(cols = c(adf.returns.test, kpss.returns.test), names_sep = "_") %>% 
+    pivot_longer(
+        cols = c(-unidade_saude,-adf.returns.test_method, -adf.returns.test_alternative,-kpss.returns.test_method),
+        names_to = c(".value", "test"),
+        names_sep = "_"
+    ) %>% 
+    select(-adf.returns.test_method, -adf.returns.test_alternative,-kpss.returns.test_method)
+
+```
+
 The **Autocorrelation Function (ACF)** and **Partial Autocorrelation Function (PACF)** show substantial correlation at 12 and 24 lags in both series, suggesting a yearly pattern, consistent with monthly data. This aligns with expectations given the nature of the dataset.
 
 ```{r "VC ACF and PACF", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=6, fig.width=8, fig.cap="ACF and PACF for Vila do Conde log variation"}
@@ -256,17 +346,27 @@ counter_factual$counter_factual_plot()
 
 ```
 
-```{r "Statistical test", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.cap="Welch T-test results. Fails to reject H0"}
+```{r}
 
-counter_factual$conclusion_test()
+counter_factual$conclusion_diff()
 
 ```
 
+The average difference between counter factual and real measurements if of -1.38 percentage points. Meaning, that the introduction of this policy lead to an increase reduction of 1.38 percentage points. This is aligned with the visual inspection of figure 14 where the counter factual follows rather closely the real series with significant differences at 01/2024 (lack of smoothing?) and 05/2024.
+
 # 4. Conclusion and future work
 
-The counterfactual analysis of the implementation of the new health policy requiring a telephone pre-triage before visiting the emergency room shows that, based on one of the test locations, there was no immediate impact from this new intervention. In other words, the number of emergencies observed during the trial period would likely have occurred even if the intervention had not been implemented.
+By modeling a counter-factual model, it was possible to show that the introduction of this new policy lead to an additional reduction in number of emergencies in ULS Vila Conde, which is aligned with @barros2024 initial remarks. Nonetheless, the impact seem to be far less pronounced raising the question if it could be consider substantial enough to justify the nation wide adoption. Despite the found effect, the model shows evidence that the great part of the behavior observer during the trial period would occurred despite the introduction of this new policy.
 
-Despite these results, it is important not to hastily conclude the ineffectiveness of such policies. As highlighted by @barros2024 in the article that motivated this study, there are additional considerations and questions that should be addressed before drawing any conclusions, such as:
+Since the obligation of a pre-triage adds friction to the system, one can only speculate the reasons for such results:
+
+-   Population was already only using the local emergency for serious occurrences (contradicting popular believe that non emergent cases are impacting performance),
+
+-   A drier/warmer period compared to previous years have lead to less emergency cases,
+
+-   The new rules lead to a change in the mix using the Manchester triage.
+
+Just to name a few. Despite these results, it is important not to hastily conclude the ineffectiveness of such policies. As highlighted by @barros2024 in the article that motivated this study, there are additional considerations and questions that should be addressed before drawing any conclusions, such as:
 
 -   Is the number of emergencies the best metric to measure the impact of such an intervention?
 
@@ -279,5 +379,95 @@ Despite these results, it is important not to hastily conclude the ineffectivene
 -   While this analysis focuses on the mean (the first moment), shouldn’t the scope of such a policy also consider the predictability of random events (the second moment)?
 
 The list of considerations goes on. At best, this study, with its simplified approach, highlights the complexities and nuances of data and impact analysis in the context of decision-making. It serves as a reminder that first impressions can be misleading.
+
+# Appendix A: modeling the counter factual  {.appendix}
+
+## Background
+
+Following [@cryer2009] we can define an intervention as such:
+
+> Intervention analysis, introduced by Box and Tiao (1975), provides a framework for assessing the effect of an intervention on a time series under study. It is assumed that the intervention affects the process by changing the mean function or trend of a time series. Interventions can be natural or man-made. (...)
+
+In light of this definition a series can then be defined as such:
+
+$$
+y_{t} = m_{t} + N_{t}
+$$
+
+Where $m_{t}$ is the change in the mean function and $N_{t}$ is modeled as some ARIMA process, possibly seasonal (see [@cryer2009]) and $t$ the moment intervention occurred. Before moment $t$ it's assumed that $m_{t} = 0$. The effect of the intervention on the mean function can often captured by the use of simple functions as the **step function** or **pulse function**. On both instances a dummy variable will flag the the time the intervention takes place and we can model as $m_{t}=\alpha S_{t}$. As explained by [@cryer2009], $\alpha$ *is the unknown permanent change in the mean due to the intervention. Testing whether* $\alpha = 0$ *or not is similar to testing whether the population means are the same with data in the form of two independent random samples from the two populations.* In case of delayed impact of the intervention more complex modeling can be used out of the same premises.
+
+Using intervention modeling it would then be possible to evaluate if the introduction of this new policy had any impact on the mean of the time series. The $\alpha$ would then provide not only the intensity of the intervention but also test is statistical significance.
+
+## Limitations 
+
+Despite being a valid approach, univariate intervention analysis using a step function does include the entirety of the information available for the analysis. Due to the nature of the series an unforeseen number of variables can impact the outcome. Some of those effects could be included in $N_{t}$ and probably go beyond *ARIMA* and use other model Technics. But this would require adding a layer of complexity to the model and additional context information which is not available (eg: flu intensity and weather is expected to have an impact).
+
+The originality of the study at end is the fact that a reference series was identified by domain experts. This means **that any number of external impact from any origin which would impact the series under study would also impact the the reference series** even if at different degrees. Not using the additional knowledge provided by a reference series would be similar to estimate a Weighted average cost of capital (WACC) disregarding the market risk.
+
+## Model using exogenous variables
+
+Being $Y_{vc}$ the time series under analysis, it could model as follows disregarding any reference or co-variate [see @thearim2010] :
+
+$$
+Y_{t} = \phi_{1} y_{t-1} + ... + \phi_{p} t_{t-p} - \theta_{1} z_{t-1} - ... - \theta_{q} z_{t-q} + z_{t}
+$$ Above is the definition for a ARMA(p,q). Adding an additional variable or co-variate is the equivalent to do the following:
+
+$$
+Y_{t} = \beta x_{t_n} + \phi_{1} y_{t-1} + ... + \phi_{p} t_{t-p} - \theta_{1} z_{t-1} - ... - \theta_{q} z_{t-q} + z_{t}
+$$
+
+Where $X$ stands for the co-variate or reference series (in this study this would be ULS Barcelos time series) and $n$ for the lag. In reality a strong correlation could exist at several lag moments between $Y$ and $X$ therefore, the above formula could be expanded as such:
+
+$$
+Y_{t} = \beta_{0} + \beta x_{t_1} + ... + \beta x_{t_k} + \phi_{1} y_{t-1} + ... + \phi_{p} t_{t-p} - \theta_{1} e_{t-1} - ... - \theta_{q} e_{t-q} + e_{t} <=> \phi(B)y_{t} = \upsilon(B)x_{t} +  \theta(B)e_{t}
+$$
+
+where $\upsilon(B)x_{t}$ is the transfer function of $X$. This formula would them allow to expand the signals available to understand and forecast future points in $Y$ either by using one or multiple covariates/references.
+
+Forecasting additional point in $Y$ requires some sort of lead/follow relation between both series. In simple terms, some form of relationship between present $Y$ and past $X$ is needed in order to use that signal for future prediction. But, that's not the role the reference series plays in this study. **The assumptions is that the reference series is exposed to the same external factors as the study series and therefore works as an index for external factors. In this respect what really matters is if there is a strong relationship at instant moment, meaning lag 0, since the goal is to use that information to predict an alternate reality where no intervention took place.**
+
+```{r "ccf_appendix", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=4, fig.width=8, fig.cap="CCF between Barcelos and Vila do Conde"}
+
+counter_factual$ccf_plots()
+
+```
+
+Figure 15 shows a strong cross-correlation between the series under study (ULS Vila do Conde) and the reference one (ULS Barcelos) at lag 0 just as desired[^3]. This means that, until January 2024, the moment where the new policy was implemented (start of the intervention) both series followed closely each other[^4].
+
+[^3]: Both series stationary when calculations were made.
+
+[^4]: The following code was used to calculate ccf. Consider vc the log variation of vila do conde and bc the log variation of bc, bot stationary series.
+
+    \`\`\`\
+    fit \<- auto.arima(bc)
+
+    white_bc \<- residuals(fit) white_vc \<- residuals(Arima(vc, model = fit))
+
+    ccf_results \<- ccf( white_bc, white_vc, lag.max = 24, main = "Cross-Correlation of Prewhitened Series")\
+    \`\`\`
+
+## Modeling the counter factual
+
+Using the *auto.arima* function from package *forecast* with an external regression we can study to residuals and conclude that we have an *acceptable model* to use as counter-factual, meaning, to predict an alternative reality where no intervention took place.
+
+```{r "Counter factual model fitting appendix", echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, fig.height=6, fig.width=8, fig.cap="Counter factual model fit" }
+
+counter_factual$counter_factual_model()
+
+```
+
+Giving the way auto.arima works, by modeling to the ARMA errors, the counter factual model can be defined as follows[^5]:
+
+[^5]: The goal of this analysis is to use classic time series statistics, namely dynamic models to get a *first felling* on the impact of a policy. Typically, a model process would require additional care to void over-fitting, namely by splitting between test and train data. But, in this case the goal is not to predict but instead to model and understand a reality. Under this circumstances the author concluded that event of over fitting does not significantly impact the conclusions.
+
+$$
+\eta = vc_{t} - 0.9329\,bc_{t}
+$$
+
+$$
+vc_t = 0.6958\,(vc_{t-1} - \eta_{t-1}) +  0.7993 \, (vc_{t-12} - \eta_{t-12}) + e_t - 0.9413 \, e_{t-1} - 0.503 \, e_{t-12}
+$$
+
+Where $VC$ stands for ULS Vila do Conde series and $BC$ for ULS Barcelos series.
 
 # References
