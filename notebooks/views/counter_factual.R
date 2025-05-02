@@ -52,7 +52,7 @@ ccf_plots <- function() {
   vc <- na.omit(df$pre_intervention.ts[[2]])
   bc <- na.omit(df$pre_intervention.ts[[1]])
   
-  fit <- fit_bc <- auto.arima(bc)
+  fit <- auto.arima(bc)
   
   white_bc <- residuals(fit)
   white_vc <- residuals(Arima(vc, model = fit))
@@ -117,11 +117,6 @@ counter_factual_plot <- function() {
       subtitle =" Log monthly variations of emergency occurences including counter factual and Barcelos",
       x="",
       y="") +
-    #annotate("rect", xmin = as.Date("2014-01-01"), xmax = as.Date("2014-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
-    #annotate("rect", xmin = as.Date("2016-01-01"), xmax = as.Date("2016-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
-    #annotate("rect", xmin = as.Date("2018-01-01"), xmax = as.Date("2018-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray") +
-    #annotate("rect", xmin = as.Date("2020-01-01"), xmax = as.Date("2020-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
-    #annotate("rect", xmin = as.Date("2022-01-01"), xmax = as.Date("2022-12-31"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  +
     annotate("rect", xmin = as.Date("2024-01-01"), xmax = as.Date("2024-09-30"), ymin = -Inf, ymax = Inf, alpha = 0.3, fill = "lightgray")  
   
   return(plot)
@@ -145,5 +140,33 @@ conclusion_test <- function() {
   t_test_result <- t.test(counter_factual.tibble$value, real.tibble$emergencias_mensais, alternative = "two.sided", var.equal = FALSE)
   
   return(t_test_result)
+  
+}
+
+#' @export
+conclusion_diff <- function() {
+  
+  counter_factual.ts <- forecast(counter_factual.model, h =9, xreg = na.omit(df$post_intervention.ts[[1]]))
+  
+  counter_factual.tibble <- tk_tbl(counter_factual.ts$mean) %>% 
+    mutate(date = lubridate::ym(format(index, format = "%y-%m")))
+  
+  real.tibble <- df %>% 
+    filter(unidade_saude == "Vila do Conde") %>%
+    unnest(cols = c(returns_corrected.tibble)) %>%  
+    mutate(date = lubridate::ym(format(index, format = "%y-%m"))) %>%  
+    filter(date >= "2024-01-01") %>% 
+    select(emergencias_mensais, date)
+  
+  join <- left_join(real.tibble, counter_factual.tibble, by = "date") %>% 
+    mutate(
+      percent.real = (exp(emergencias_mensais) - 1) * 100,
+      percent.counterfactual = ( exp(value) - 1) * 100 ,
+      diff = percent.real - percent.counterfactual
+      )
+  
+  result <- join %>% summarise(mean(diff))
+  
+  return(result)
   
 }
